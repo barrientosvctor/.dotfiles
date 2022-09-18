@@ -1,0 +1,79 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "alignment": "left",
+      "segments": [
+        {
+          "background": "#002b36",
+          "foreground": "#859900",
+          "properties": {
+            "ubuntu": "\uf31c",
+            "linux": "\ue712",
+            "arch": "\uf303",
+            "debian": "\uf306",
+            "fedora": "\uf30a",
+            "mint": "\uf30f",
+            "macos": "\ue711",
+            "wsl": "\ue712",
+	    "windows": "\ue62a",
+            "manjaro": "\uf312",
+            "opensuse": "\uf314",
+	    "alpine": "\uf300",
+            "centos": "\uf304",
+            "elementary": "\uf309",
+            "gentoo": "\uf30d",
+            "raspbian": "\uf315"
+          },
+          "powerline_symbol": "\ue0b0",
+          "style": "powerline",
+          "template": " {{ if .WSL }}WSL at {{ end }}{{.Icon}} ",
+          "type": "os"
+        },
+        {
+          "background": "#07333c",
+          "foreground": "#268bd2",
+          "powerline_symbol": "\ue0b0",
+          "properties": {
+            "folder_icon": "\ue5fe",
+            "folder_separator_icon": "/",
+            "home_icon": "~",
+            "max_depth": 3,
+            "style": "folder"
+          },
+          "style": "powerline",
+          "template": " \ue5fe {{ .Path }} ",
+          "type": "path"
+        },
+        {
+          "background": "#07333d",
+          "foreground": "#d33682",
+	  "properties": {
+	      "time_format": "15:04:05"
+	  },
+          "powerline_symbol": "\ue0b0",
+          "style": "powerline",
+          "template": " {{ .CurrentDate | date .Format }} ",
+          "type": "time"
+        },
+        {
+          "background": "#07333e",
+          "foreground": "#dc322f",
+          "powerline_symbol": "\ue0b0",
+          "properties": {
+            "branch_max_length": 25,
+            "fetch_stash_count": true,
+            "fetch_status": true,
+            "fetch_upstream_icon": true
+          },
+          "style": "powerline",
+	  "template": "{{ .UpstreamIcon }}{{ .HEAD }}{{ .BranchStatus }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \uf692 {{ .StashCount }}{{ end }} ",
+          "type": "git"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "final_space": true,
+  "version": 2
+}
