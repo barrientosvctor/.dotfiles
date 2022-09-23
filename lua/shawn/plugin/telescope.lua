@@ -25,7 +25,7 @@ telescope.setup {
 	    hijack_netrw = true,
 	    path = '%:p:h',
 	    cwd = vim.fn.expand('%:p:h'),
-	    respect_gitignore = true,
+	    respect_gitignore = false,
 	    hidden = true,
 	    grouped = true,
 	    previewer = false,
@@ -45,7 +45,6 @@ telescope.setup {
 		    ['R'] = fb_actions.rename,
 		    ['sa'] = fb_actions.select_all,
 		    ['m'] = fb_actions.move,
-		    -- ['o'] = fb_actions.open,
 		    ['h'] = fb_actions.goto_parent_dir
 		}
 	    }

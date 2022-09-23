@@ -18,12 +18,12 @@
           "type": "path"
         },
         {
-          "foreground": "#94f88a",
+          "foreground": "#D75F00",
           "properties": {
             "display_host": true
           },
           "style": "diamond",
-          "template": "\ue286 ",
+          "template": "λ",
           "type": "session"
         },
         {
