@@ -5,7 +5,7 @@ require('gruvbox').setup {
       undercurl = true,
       underline = true,
       bold = true,
-      italic = true,
+      italic = false,
       strikethrough = true,
       inverse = true, -- invert background for search, diffs, statuslines and errors
       contrast = 'hard', -- can be "hard", "soft" or empty string
