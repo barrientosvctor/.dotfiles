@@ -1,32 +1,30 @@
-local status, solarized = pcall(require, "neosolarized")
-if (not status) then return end
+local status, solarized = pcall(require, 'solarized')
+if not status then return end
 
 solarized.setup({
-  comment_italics = true,
+    transparent = true,
+    theme = 'neovim', -- Available themes: vim/neovim and vscode
+    mode = 'dark',
+    highlights = function(colors)
+	return {
+	    -- Colorscheme
+	    LineNr = { bg = solarized:is_transparent(colors.bg_alt) }, -- bg_alt if solarized is not transparent
+	    CursorLineNr = { fg = '#f9ef17', bg = '#00000f' },
+	    TSBoolean = { fg = colors.yellow },
+
+	    -- CMP KIND
+	    CmpItemKindTabnine = { fg = colors.magenta },
+	    CmpItemKindEmoji = { fg = colors.yellow },
+	    CmpItemAbbrMatch = { bg = '#00000a', fg = '#e1cd84', reverse = true },
+
+	    -- Telescope
+	    TelescopePreviewTitle = { fg = '#2aa19a', bg = solarized:is_transparent(colors.bg_alt) },
+	    TelescopeResultsTitle = { fg = '#2aa19a', bg = solarized:is_transparent(colors.bg_alt) },
+	    TelescopePromptTitle = { fg = '#2aa19a', bg = solarized:is_transparent(colors.bg_alt) },
+	    TelescopeSelection = { fg = '#cb4b16' },
+	    TelescopeMatching = { bg = '#00000a', fg = '#e1cd84', reverse = true },
+	}
+    end,
 })
 
-local cb = require('colorbuddy.init')
-local Color = cb.Color
-local colors = cb.colors
-local Group = cb.Group
-local groups = cb.groups
-local styles = cb.styles
-
-Color.new('black', '#000000')
-Group.new('CursorLine', colors.none, colors.base03, styles.NONE, colors.base1)
-Group.new('CursorLineNr', colors.yellow, colors.black, styles.NONE, colors.base1)
-Group.new('Visual', colors.none, colors.base03, styles.reverse)
-
-local cError = groups.Error.fg
-local cInfo = groups.Information.fg
-local cWarn = groups.Warning.fg
-local cHint = groups.Hint.fg
-
-Group.new("DiagnosticVirtualTextError", cError, cError:dark():dark():dark():dark(), styles.NONE)
-Group.new("DiagnosticVirtualTextInfo", cInfo, cInfo:dark():dark():dark(), styles.NONE)
-Group.new("DiagnosticVirtualTextWarn", cWarn, cWarn:dark():dark():dark(), styles.NONE)
-Group.new("DiagnosticVirtualTextHint", cHint, cHint:dark():dark():dark(), styles.NONE)
-Group.new("DiagnosticUnderlineError", colors.none, colors.none, styles.undercurl, cError)
-Group.new("DiagnosticUnderlineWarn", colors.none, colors.none, styles.undercurl, cWarn)
-Group.new("DiagnosticUnderlineInfo", colors.none, colors.none, styles.undercurl, cInfo)
-Group.new("DiagnosticUnderlineHint", colors.none, colors.none, styles.undercurl, cHint)
+vim.cmd [[colorscheme solarized]]

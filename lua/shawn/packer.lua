@@ -8,12 +8,9 @@ packer.startup(function(use)
     use 'wbthomason/packer.nvim'
 
     -- Themes --
-    use {
-	'svrana/neosolarized.nvim',
-	requires = { 'tjdevries/colorbuddy.nvim' }
-    }
-    use 'ellisonleao/gruvbox.nvim'
+    use 'maxmx03/solarized.nvim'
     use 'Shatur/neovim-ayu'
+    use 'morhetz/gruvbox'
 
     -- Syntax --
     use {
@@ -34,6 +31,10 @@ packer.startup(function(use)
     use 'neovim/nvim-lspconfig'
     use 'onsails/lspkind.nvim'
     use 'glepnir/lspsaga.nvim'
+    use {
+	'williamboman/nvim-lsp-installer',
+	requires = { 'neovim/nvim-lspconfig' }
+    }
 
     -- LSP Autocompletion --
     use {

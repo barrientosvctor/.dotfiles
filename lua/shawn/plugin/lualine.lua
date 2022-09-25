@@ -3,7 +3,7 @@ if not status then return end
 
 lualine.setup({
     options = {
-        theme = 'solarized_dark',
+        theme = 'auto',
         component_separators = '|',
         section_separators = '',
         icons_enabled = true,

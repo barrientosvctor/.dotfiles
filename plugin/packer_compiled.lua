@@ -89,20 +89,15 @@ _G.packer_plugins = {
     path = "C:\\Users\\josal\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
-  ["colorbuddy.nvim"] = {
-    loaded = true,
-    path = "C:\\Users\\josal\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\colorbuddy.nvim",
-    url = "https://github.com/tjdevries/colorbuddy.nvim"
-  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "C:\\Users\\josal\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
-  ["gruvbox.nvim"] = {
+  gruvbox = {
     loaded = true,
-    path = "C:\\Users\\josal\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\gruvbox.nvim",
-    url = "https://github.com/ellisonleao/gruvbox.nvim"
+    path = "C:\\Users\\josal\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\gruvbox",
+    url = "https://github.com/morhetz/gruvbox"
   },
   ["lspkind.nvim"] = {
     loaded = true,
@@ -126,11 +121,6 @@ _G.packer_plugins = {
     path = "C:\\Users\\josal\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\markdown-preview.nvim",
     url = "https://github.com/iamcco/markdown-preview.nvim"
   },
-  ["neosolarized.nvim"] = {
-    loaded = true,
-    path = "C:\\Users\\josal\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\neosolarized.nvim",
-    url = "https://github.com/svrana/neosolarized.nvim"
-  },
   ["neovim-ayu"] = {
     loaded = true,
     path = "C:\\Users\\josal\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\neovim-ayu",
@@ -150,6 +140,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "C:\\Users\\josal\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-colorizer.lua",
     url = "https://github.com/norcalli/nvim-colorizer.lua"
+  },
+  ["nvim-lsp-installer"] = {
+    loaded = true,
+    path = "C:\\Users\\josal\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-lsp-installer",
+    url = "https://github.com/williamboman/nvim-lsp-installer"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -180,6 +175,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "C:\\Users\\josal\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
+  },
+  ["solarized.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\josal\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\solarized.nvim",
+    url = "https://github.com/maxmx03/solarized.nvim"
   },
   ["telescope-file-browser.nvim"] = {
     loaded = true,

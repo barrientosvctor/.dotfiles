@@ -8,6 +8,7 @@ require('shawn.plugin.lualine')
 
 -- LSP
 require('shawn.plugin.lspconfig')
+require('shawn.plugin.lspinstaller')
 require('shawn.plugin.cmp') -- LSP Autocompletion
 require('shawn.plugin.lspsaga') -- LSP UI
 
