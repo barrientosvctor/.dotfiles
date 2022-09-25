@@ -16,10 +16,8 @@
 
 **Note:** Before the plugins installation, you need install [packer.nvim](https://github.com/wbthomason/packer.nvim).
 
-* [neosolarized.nvim](https://github.com/svrana/neosolarized.nvim)
-    * It requires [colorbuddy.nvim](https://github.com/tjdevries/colorbuddy.nvim)
-
-* [gruvbox.nvim](https://github.com/ellisonleao/gruvbox.nvim)
+* [solarized.nvim](https://github.com/maxmx03/solarized.nvim)
+* [morhetz/gruvbox](https://github.com/morhetz/gruvbox)
 * [neovim-ayu](https://github.com/Shatur/neovim-ayu)
 * [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - [Treesitter](https://github.com/tree-sitter/tree-sitter) configurations and abstraction layer for Neovim.
 * [nvim-autopairs](https://github.com/windwp/nvim-autopairs) - Insert or delete brackets, parens, quotes in pair.
@@ -28,6 +26,7 @@
 * [nvim-lualine/lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) - A blazing fast and easy to configure Neovim statusline written in Lua.
 * [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) - **(Optional)** A lua fork of [vim-devicons](https://github.com/ryanoasis/vim-devicons). This plugin provides the same icons as well as colors for each icon.
 * [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) - A collection of configurations for Neovim's built-in LSP.
+* [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer) - A simple way to install a Language Server Protocol (LSP).
 * [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) - A completion engine plugin for neovim written in Lua. Completion sources are installed from external repositories and "sourced".
 * [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp) - A [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) source for neovim's built-in language server client.
 * [cmp-path](https://github.com/hrsh7th/cmp-path) - A [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) source for filesystem paths.
