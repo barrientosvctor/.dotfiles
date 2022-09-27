@@ -18,12 +18,9 @@ lualine.setup({
 	},
         lualine_c = {
             { 'filename', file_status = true, path = 0 }, -- just filename, 1 = relative path, 2 = absolute path
-            { 'diagnostics' },
-        },
-        lualine_x = {
 	    { 'diagnostics', sources = { 'nvim_diagnostic' }, symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' } },
-	    'filetype'
-	},
+        },
+        lualine_x = { 'filetype' },
         lualine_y = { 'progress' },
         lualine_z = { 'location' },
     },

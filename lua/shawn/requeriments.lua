@@ -23,6 +23,6 @@ require('shawn.plugin.gitsigns')
 require('shawn.plugin.ultisnips')
 
 -- Themes
-require('shawn.plugin.solarized')
--- require('shawn.plugin.gruvbox')
+-- require('shawn.plugin.solarized')
+require('shawn.plugin.gruvbox')
 -- require('shawn.plugin.ayu')
