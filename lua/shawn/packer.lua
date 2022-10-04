@@ -13,10 +13,12 @@ packer.startup(function(use)
     use 'morhetz/gruvbox'
     use 'shaunsingh/nord.nvim'
     use '~/AppData/Local/nvim-data/site/pack/local/start'
+    use '~/AppData/Local/nvim-data/site/pack/local/vscode.nvim/'
 
     -- Syntax --
     use {
 	'nvim-treesitter/nvim-treesitter',
+	requires = 'nvim-treesitter/playground',
 	run = ':TSUpdate'
     }
     use 'windwp/nvim-autopairs'
@@ -65,4 +67,5 @@ packer.startup(function(use)
     }
     use({ 'iamcco/markdown-preview.nvim', run = 'cd app && npm install', setup = function() vim.g.mkdp_filetypes = { 'markdown' } end, ft = { 'markdown' }, })
     use 'lewis6991/gitsigns.nvim'
+    use 'numToStr/Comment.nvim'
 end)

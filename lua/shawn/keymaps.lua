@@ -21,6 +21,10 @@ keymap.set('n', 'gd', '<Cmd>Lspsaga lsp_finder<cr>', opts)
 keymap.set('n', 'gp', '<Cmd>Lspsaga preview_definition<cr>', opts)
 keymap.set('n', 'gr', '<Cmd>Lspsaga rename<cr>', opts)
 
+-- Treesitter playground
+keymap.set('n', 'ñ', '<Cmd>TSCaptureUnderCursor<cr>', opts)
+keymap.set('n', ',', '<Cmd>TSPlaygroundToggle<cr>', opts)
+
 -- Delete words
 keymap.set('n', 'z', '"_x', opts)
 keymap.set('n', '{', 'vb"_d', opts)

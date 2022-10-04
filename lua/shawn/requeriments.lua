@@ -21,6 +21,7 @@ require('shawn.plugin.autopairs')
 require('shawn.plugin.telescope') -- Fuzzy finder
 require('shawn.plugin.gitsigns') -- Git signs
 require('shawn.plugin.ultisnips') -- Snippets
+require('shawn.plugin.comment') -- Snippets
 
 -- Themes
 -- require('shawn.plugin.solarized')
@@ -28,3 +29,4 @@ require('shawn.plugin.ultisnips') -- Snippets
 -- require('shawn.plugin.ayu')
 require('shawn.plugin.abyss')
 -- require('shawn.plugin.nord')
+-- require('shawn.plugin.vscode')
