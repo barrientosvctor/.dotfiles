@@ -7,7 +7,7 @@ lualine.setup({
         component_separators = '|',
         section_separators = '',
         icons_enabled = true,
-        globalstatus = false,
+        globalstatus = true,
 	disabled_filetypes = {},
     },
     sections = {

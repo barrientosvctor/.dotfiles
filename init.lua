@@ -6,6 +6,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.shell = 'pwsh'
 vim.opt.wrap = false
+vim.opt.laststatus = 3
 
 -- Spaces and indents
 vim.opt.sw = 4
@@ -22,6 +23,7 @@ vim.opt.pumblend = 5
 
 -- Extras
 vim.opt.scrolloff = 10
+vim.opt.wildignore:append { '*/node_modules/*', '*/.git/*' }
 
 -- Clipboard
 if vim.fn.has('win32') then
