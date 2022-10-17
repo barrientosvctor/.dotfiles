@@ -4,7 +4,7 @@ vim.opt.termguicolors = true
 vim.opt.mouse = 'a'
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.shell = 'pwsh'
+-- vim.opt.shell = 'pwsh'
 vim.opt.wrap = false
 vim.opt.laststatus = 3
 

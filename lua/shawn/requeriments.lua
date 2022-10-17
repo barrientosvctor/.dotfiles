@@ -3,12 +3,10 @@ require('shawn.packer')
 -- Keymaps
 require('shawn.keymaps')
 
--- Status line
-require('shawn.plugin.lualine') -- Status line
-
 -- LSP
 require('shawn.plugin.lspconfig') -- LSP
-require('shawn.plugin.lspinstaller') --- LSP Installer
+require('shawn.plugin.mason') -- LSP
+require('shawn.plugin.mason-lspconfig') -- LSP
 require('shawn.plugin.cmp') -- LSP Autocompletion
 require('shawn.plugin.lspsaga') -- LSP UI
 
@@ -21,12 +19,8 @@ require('shawn.plugin.autopairs')
 require('shawn.plugin.telescope') -- Fuzzy finder
 require('shawn.plugin.gitsigns') -- Git signs
 require('shawn.plugin.ultisnips') -- Snippets
-require('shawn.plugin.comment') -- Snippets
+require('shawn.plugin.comment') -- Comments
 
 -- Themes
--- require('shawn.plugin.solarized')
 -- require('shawn.plugin.gruvbox')
--- require('shawn.plugin.ayu')
-require('shawn.plugin.abyss')
--- require('shawn.plugin.nord')
--- require('shawn.plugin.vscode')
+require('shawn.plugin.ayu')

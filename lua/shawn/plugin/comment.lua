@@ -7,11 +7,11 @@ comment.setup({
     ignore = nil,
     toggler = {
         line = '.',
-        block = '-',
+        block = '_',
     },
     opleader = {
         line = '.',
-        block = '-',
+        block = '_',
     },
     -- extra = {
     --     above = 'gcO',
