@@ -9,7 +9,10 @@ return packer.startup(function(use)
 
     -- Themes --
     use 'Shatur/neovim-ayu'
-    use 'ellisonleao/gruvbox.nvim'
+    use {
+	'shaunsingh/nord.nvim',
+	commit = '33d077018aeaa00e0e187071975bbe8675640fd7'
+    }
 
     -- Web Devicons
     use 'nvim-tree/nvim-web-devicons'

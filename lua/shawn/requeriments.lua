@@ -22,5 +22,5 @@ require('shawn.plugin.ultisnips') -- Snippets
 require('shawn.plugin.comment') -- Comments
 
 -- Themes
--- require('shawn.plugin.gruvbox')
 require('shawn.plugin.ayu')
+-- require('shawn.plugin.nord')
