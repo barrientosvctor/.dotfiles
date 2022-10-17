@@ -39,10 +39,10 @@ local kind_icons = {
 
 cmp.setup ({
     mapping = cmp.mapping.preset.insert({
-	['<C-j>'] = cmp.mapping.select_next_item(),
-	-- ['<C-s>'] = cmp.mapping.select_next_item(),
-	['<C-k>'] = cmp.mapping.select_prev_item(),
-	-- ['<C-a>'] = cmp.mapping.select_prev_item(),
+	-- ['<C-j>'] = cmp.mapping.select_next_item(),
+	['<C-s>'] = cmp.mapping.select_next_item(),
+	-- ['<C-k>'] = cmp.mapping.select_prev_item(),
+	['<C-a>'] = cmp.mapping.select_prev_item(),
 	-- ['<C-Space>'] = cmp.mapping.complete(),
 	['<C-e>'] = cmp.mapping.abort(),
 	['<cr>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
