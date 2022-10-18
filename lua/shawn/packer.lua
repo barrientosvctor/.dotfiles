@@ -13,6 +13,10 @@ return packer.startup(function(use)
 	'shaunsingh/nord.nvim',
 	commit = '33d077018aeaa00e0e187071975bbe8675640fd7'
     }
+    use {
+	'Mofiqul/vscode.nvim',
+	commit = 'c5125820a0915ef50f03fae10423c43dc49c66b1'
+    }
 
     -- Web Devicons
     use 'nvim-tree/nvim-web-devicons'
