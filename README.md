@@ -16,8 +16,9 @@
 
 **Note:** Before the plugins installation, you need install [packer.nvim](https://github.com/wbthomason/packer.nvim).
 
-* [neovim-ayu](https://github.com/Shatur/neovim-ayu)
-* [nord.nvim](https://github.com/shaunsingh/nord.nvim)
+* [neosolarized.nvim](https://github.com/svrana/neosolarized.nvim)
+    * It requires [colorbuddy.nvim](https://github.com/tjdevries/colorbuddy.nvim).
+* [abyss.nvim](https://github.com/uShawnTS/abyss.nvim)
 * [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - [Treesitter](https://github.com/tree-sitter/tree-sitter) configurations and abstraction layer for Neovim.
 * [nvim-autopairs](https://github.com/windwp/nvim-autopairs) - Insert or delete brackets, parens, quotes in pair.
 * [nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag) - Insert tags.

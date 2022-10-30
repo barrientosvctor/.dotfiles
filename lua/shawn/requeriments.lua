@@ -22,6 +22,5 @@ require('shawn.plugin.ultisnips') -- Snippets
 require('shawn.plugin.comment') -- Comments
 
 -- Themes
--- require('shawn.plugin.vscode')
--- require('shawn.plugin.solarized')
-require('shawn.plugin.abyss')
+require('shawn.plugin.solarized')
+-- require('shawn.plugin.abyss')

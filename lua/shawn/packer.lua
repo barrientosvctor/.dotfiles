@@ -9,10 +9,9 @@ return packer.startup(function(use)
 
     -- Themes --
     use {
-	'Mofiqul/vscode.nvim',
-	commit = 'c5125820a0915ef50f03fae10423c43dc49c66b1'
+	'svrana/neosolarized.nvim',
+	requires = 'tjdevries/colorbuddy.nvim'
     }
-    use '~/AppData/Local/nvim-data/site/pack/local/solarized.nvim/'
     use '~/AppData/Local/nvim-data/site/pack/local/abyss.nvim'
 
     -- Web Devicons
@@ -35,10 +34,7 @@ return packer.startup(function(use)
 	'williamboman/mason.nvim',
 	'williamboman/mason-lspconfig.nvim'
     }
-    use {
-	'glepnir/lspsaga.nvim',
-	commit = 'ae099d5844b005cec66a66ab30a44d3bf8867af9',
-    }
+    use 'glepnir/lspsaga.nvim'
 
     -- LSP Autocompletion --
     use {
