@@ -6,7 +6,12 @@ end
 
 return packer.startup(function(use)
     use "wbthomason/packer.nvim"
+
+    -- Personalization
     use "ellisonleao/gruvbox.nvim"
+    use {
+        "nvim-lualine/lualine.nvim"
+    }
 
     -- LSP
     use {
@@ -40,4 +45,5 @@ return packer.startup(function(use)
     use "jiangmiao/auto-pairs"
     use "numToStr/Comment.nvim"
     use "lewis6991/gitsigns.nvim"
+    use "gpanders/editorconfig.nvim"
 end)

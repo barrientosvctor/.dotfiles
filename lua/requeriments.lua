@@ -12,7 +12,9 @@ require("after.plugin.lspsaga")
 require("after.plugin.telescope")
 require("after.plugin.comment")
 require("after.plugin.gitsigns")
+require("after.plugin.editorconfig")
 
--- Themes
+-- Personalization
+require("after.plugin.lualine")
 require("after.plugin.habamax")
 -- require("after.plugin.gruvbox")
