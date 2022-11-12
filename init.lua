@@ -2,7 +2,7 @@ vim.opt.background = "dark"
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.termguicolors = true
-vim.opt.wrap = true
+vim.opt.wrap = false
 vim.opt.laststatus = 3
 
 -- Spaces / indents
