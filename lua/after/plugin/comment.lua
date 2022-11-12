@@ -1,4 +1,4 @@
-local status, comment = pcall(require, 'Comment')
+local status, comment = pcall(require, "Comment")
 if not status then return end
 
 comment.setup({
@@ -6,18 +6,13 @@ comment.setup({
     sticky = true,
     ignore = nil,
     toggler = {
-        line = '.',
-        block = '_',
+        line = ".",
+        block = ",",
     },
     opleader = {
-        line = '.',
-        block = '_',
+        line = ".",
+        block = ",",
     },
-    -- extra = {
-    --     above = 'gcO',
-    --     below = 'gco',
-    --     eol = 'gcA',
-    -- },
     mappings = {
         basic = true,
         extra = true,
