@@ -1,3 +1,6 @@
+# Set UTF-8 on PowerShell
+[console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding
+
 # Oh my posh
 # oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\shawn.omp.json" | Invoke-Expression
 # oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\shawn-solarized.omp.json" | Invoke-Expression
