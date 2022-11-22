@@ -16,5 +16,5 @@ require("after.plugin.editorconfig")
 
 -- Personalization
 require("after.plugin.lualine")
-require("after.plugin.habamax")
--- require("after.plugin.gruvbox")
+-- require("after.plugin.habamax")
+require("after.plugin.gruvbox")
