@@ -18,7 +18,7 @@
 ### Requeriments
 * Any terminal
 * sudo
-* C compiler (gcc) (only if you want to make a build of vim): `sudo apt install`
+* C compiler (gcc) (only if you want to make a build of vim): `sudo apt install gcc`
 * ncurses-dev (only if you want to make a build of vim): `sudo apt install ncurses-dev`
 * nvm: Node version manager.
 > To learn how to install it, click [here](https://learn.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-wsl) for WSL2 installation or [here](https://www.freecodecamp.org/news/node-version-manager-nvm-install-guide/) for Unix
