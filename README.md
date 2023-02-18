@@ -16,12 +16,14 @@
 
 ## Unix setup
 ### Requeriments
-* Any terminal
-* sudo
-* C compiler (gcc) (only if you want to make a build of vim): `sudo apt install gcc`
-* ncurses-dev (only if you want to make a build of vim): `sudo apt install ncurses-dev`
 * nvm: Node version manager.
-> To learn how to install it, click [here](https://learn.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-wsl) for WSL2 installation or [here](https://www.freecodecamp.org/news/node-version-manager-nvm-install-guide/) for Unix
+* C compiler (gcc) (only if you want to make a build of vim): `sudo apt install gcc`
+* ncurses-dev, libncurses5-dev, libncursesw5-dev, build-essential, make (only if you want to make a vim build)
+```
+$ sudo apt-get install libncurses5-dev libncursesw5-dev
+$ sudo apt install make
+$ sudo apt install build-essential
+```
 
 ### Plugins
 * [Oh my Zsh](https://ohmyz.sh/) - Prompt theme engine for Unix operative systems
