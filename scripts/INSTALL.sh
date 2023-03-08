@@ -26,6 +26,7 @@ echo "------ VIM successfully installed ------"
 cd ~/$folder_name
 echo "------ Setting symlinks... ------"
 ln -s ~/$folder_name/.bashrc ~/.bashrc
+ln -s ~/$folder_name/.bash_profile ~/.bash_profile
 ln -s ~/$folder_name/.zshrc ~/.zshrc
 ln -s ~/$folder_name/.editorconfig ~/.editorconfig
 ln -s ~/$folder_name/.prettierrc.json ~/.prettierrc.json

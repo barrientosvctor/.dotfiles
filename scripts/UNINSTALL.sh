@@ -2,6 +2,7 @@
 
 echo "------ Unlinking symlinks... ------"
 unlink ~/.bashrc
+unlink ~/.bash_profile
 unlink ~/.zshrc
 unlink ~/.editorconfig
 unlink ~/.prettierrc.json
