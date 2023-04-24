@@ -36,7 +36,7 @@ packages-setup ()
 build-vim ()
 {
     echo "------ Installing dependencies to build VIM... ------"
-    sudo apt-get install make libncurses5-dev libncursesw5-dev build-essential
+    sudo apt-get install make libncurses5-dev libncursesw5-dev build-essential python3
     echo "------ VIM dependencies successfully installed ------"
 }
 
@@ -45,8 +45,15 @@ install-vim ()
     echo "------ Installing VIM...  ------"
     git clone https://github.com/barrientosvctor/vim.git ~/vim
     cd ~/vim/src
-    make
-    sudo make install
+    ./configure --with-features=huge \
+        --enable-multibyte \
+        --enable-python3interp=yes \
+        --with-python3-config-dir=$(python3-config --configdir) \
+        --enable-gui=auto \
+        --enable-cscope \
+        --prefix=/usr/local \
+        --enable-fail-if-missing
+    make && sudo make install
     echo "------ VIM successfully installed ------"
 }
 
@@ -84,7 +91,7 @@ zsh-install ()
     echo "------ Installing Oh My Zsh...  ------"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-    if [ -f "~/.zshrc" ]; then
+    if [ -f $zshrc_file_path ]; then
         rm -rf $zshrc_file_path
         ln -s ~/$folder_name/.zshrc $zshrc_file_path
     else
