@@ -1,25 +1,8 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
-# Import additional configuration files
-#
-# Imports are loaded in order, skipping all missing files, with the importing
-# file being loaded last. If a field is already present in a previous import, it
-# will be replaced.
-#
-# All imports must either be absolute paths starting with `/`, or paths relative
-# to the user's home directory starting with `~/`.
 #import:
 #  - /path/to/alacritty.yml
-# Any items in the `env` entry below will be added as
-# environment variables. Some entries may override variables
-# set by alacritty itself.
 env:
-# TERM variable
-#
-# This value is used to set the `$TERM` environment variable for
-# each instance of Alacritty. If it is not present, alacritty will
-# check the local terminfo database and use `alacritty` if it is
-# available, otherwise `xterm-256color` is used.
   TERM: xterm-256color
 window:
   # Window dimensions (changes require restart)
@@ -61,7 +44,7 @@ window:
   #
   # Window opacity as a floating point number from `0.0` to `1.0`.
   # The value `0.0` is completely transparent and `1.0` is opaque.
-  opacity: 0.9
+  opacity: 1
   # Startup Mode (changes require restart)
   #
   # Values for `startup_mode`:
@@ -384,9 +367,9 @@ font:
   #   - (Linux/BSD/macOS) `$SHELL` or the user's login shell, if `$SHELL` is unset
   #   - (Windows) powershell
   # shell:
-   # program: /bin/bash
-   # args:
-   #   - --login
+  # program: /bin/bash
+  # args:
+  #   - --login
   # Startup directory
   #
   # Directory the shell is started in. If this is unset, or `None`, the working
@@ -687,18 +670,10 @@ font:
 #
 #    A `~` operator can be used before a mode to apply the binding whenever
 #    the mode is *not* active, e.g. `~Alt`.
-#
-# Bindings are always filled by default, but will be replaced when a new
-# binding with the same triggers is defined. To unset a default binding, it can
-# be mapped to the `ReceiveChar` action. Alternatively, you can use `None` for
-# a no-op if you do not wish to receive input characters for that binding.
-#
-# If the same trigger is assigned to multiple actions, all of them are executed
-# in the order they were defined in.
 key_bindings:
   - { key: N, mods: Control, action: CreateNewWindow }
-  - { key: V,              mods: Command,                    action: Paste                 }
-  - { key: C,              mods: Command,                    action: Copy                  }
+  - { key: V, mods: Command, action: Paste }
+  - { key: C, mods: Command, action: Copy }
   #debug:
   # Display the time it takes to redraw each frame.
   #render_timer: false

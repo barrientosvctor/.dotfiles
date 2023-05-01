@@ -22,7 +22,7 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=es_ES.UTF-8
 
 # Preferred editor
-export EDITOR='vim'
+export EDITOR='nvim'
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
