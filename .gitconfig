@@ -1,0 +1,7 @@
+[init]
+	defaultBranch = main
+[alias]
+	st = status
+	cm = commit -m
+	cam = commit -am
+	tree = log --graph --decorate --oneline --all
