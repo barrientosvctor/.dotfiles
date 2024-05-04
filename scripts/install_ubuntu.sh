@@ -26,7 +26,8 @@ setup_vimrc() {
 }
 
 # Install packages
-sudo apt install git tmux gcc g++ cmake
+# CMake also includes c (cc, gcc) and c++ (g++, c++) compilers.
+sudo apt install git tmux cmake
 
 # Symlink files
 ln -s ~/${folder_name}/.bashrc ~/.bashrc
