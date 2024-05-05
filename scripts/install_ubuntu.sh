@@ -15,8 +15,7 @@ install_vim_from_source() {
             --enable-gui=gtk3 \
             --disable-netbeans \
             --enable-luainterp=yes
-	make
-	sudo make install
+	make && sudo make install
 }
 
 setup_vimrc() {
@@ -25,15 +24,16 @@ setup_vimrc() {
 	make
 }
 
-# Install packages
-# CMake also includes c (cc, gcc) and c++ (g++, c++) compilers.
-sudo apt install git tmux cmake
+install_packages() {
+	# CMake also includes c (cc, gcc) and c++ (g++, c++) compilers.
+	sudo apt install git tmux cmake
+	echo "Installed packages: git, tmux, cmake"
+}
 
-# Symlink files
-ln -s ~/${folder_name}/.bashrc ~/.bashrc
-ln -s ~/${folder_name}/.editorconfig ~/.editorconfig
-ln -s ~/${folder_name}/.prettierrc.json ~/.prettierrc.json
-ln -s ~/${folder_name}/.gitconfig ~/.gitconfig
-ln -s ~/${folder_name}/.tmux.conf ~/.tmux.conf
-
-echo "Installed packages: git, tmux, gcc, g++, cmake"
+symlink_dotfiles() {
+	ln -s ~/${folder_name}/.bashrc ~/.bashrc
+	ln -s ~/${folder_name}/.editorconfig ~/.editorconfig
+	ln -s ~/${folder_name}/.prettierrc.json ~/.prettierrc.json
+	ln -s ~/${folder_name}/.gitconfig ~/.gitconfig
+	ln -s ~/${folder_name}/.tmux.conf ~/.tmux.conf
+}
