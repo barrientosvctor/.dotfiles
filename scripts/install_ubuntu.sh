@@ -3,7 +3,7 @@
 folder_name=".dotfiles"
 
 install_vim_from_source() {
-	sudo apt-get install lua5.1 liblua5.1-dev make
+	sudo apt-get install lua5.1 liblua5.1-dev make libxt-dev libgtk-3-dev
 
 	git clone https://github.com/vim/vim.git ~/vim
 	cd ~/vim
@@ -12,7 +12,7 @@ install_vim_from_source() {
             --enable-cscope \
             --enable-multibyte \
             --enable-fontset \
-            --disable-gui \
+            --enable-gui=gtk3 \
             --disable-netbeans \
             --enable-luainterp=yes
 	make
