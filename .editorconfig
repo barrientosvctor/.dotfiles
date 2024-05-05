@@ -8,7 +8,7 @@ indent_size = 4
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-[*.{js,ts,cjs,mjs,yaml,yml,c,cpp,h}]
+[*.{js,ts,cjs,mjs,yaml,yml,tsx}]
 indent_size = 2
 
 [Makefile]
