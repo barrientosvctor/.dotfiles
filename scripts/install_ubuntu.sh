@@ -32,6 +32,7 @@ install_packages() {
 
 symlink_dotfiles() {
 	ln -s ~/${folder_name}/.bashrc ~/.bashrc
+	ln -s ~/${folder_name}/.bash_logout ~/.bash_logout
 	ln -s ~/${folder_name}/.editorconfig ~/.editorconfig
 	ln -s ~/${folder_name}/.prettierrc.json ~/.prettierrc.json
 	ln -s ~/${folder_name}/.gitconfig ~/.gitconfig
