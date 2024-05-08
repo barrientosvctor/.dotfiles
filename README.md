@@ -17,42 +17,29 @@
 Dotfiles (un)installation are managed by scripts located un [scripts](/scripts/) folder, you need to convert the script file you want to execute as Bash Script Executable file.
 
 > **Installation**
-* Linux OS: [INSTALL.sh](/scripts/INSTALL.sh)
+* Linux OS: [install.sh](/scripts/install.sh)
 * Termux: [TERMUX.sh](/scripts/TERMUX.sh)
 
 > **Uninstallation**
-* Linux OS: [UNINSTALL.sh](/scripts/UNINSTALL.sh)
+* Linux OS: [uninstall.sh](/scripts/uninstall.sh)
 * Termux: [TERMUX-UNINSTALL.sh](/scripts/TERMUX-UNINSTALL.sh)
+
+You need to convert to Bash Script Executable file all scripts located in [scripts](/scripts/) folder, for this, type the following command:
+
+```
+$ chmod u+x ./scripts/*.sh
+```
 
 ## Installation
 
-> **Linux OS**
 ```
-$ chmod u+x ./scripts/INSTALL.sh
-```
-
-> **Termux**
-```
-$ chmod u+x ./scripts/TERMUX.sh
+$ ./scripts/install.sh
 ```
 
 ## Uninstallation
 
-> **Linux OS**
 ```
-$ chmod u+x ./scripts/UNINSTALL.sh
-```
-
-> **Termux**
-```
-$ chmod u+x ./scripts/TERMUX-UNINSTALL.sh
-```
-
-**Note:**
-* If you want to convert to Bash Script Executable file all scripts located in [scripts](/scripts/) folder, type the following command:
-
-```
-$ chmod u+x ./scripts/*.sh
+$ ./scripts/uninstall.sh
 ```
 
 ### Plugins
