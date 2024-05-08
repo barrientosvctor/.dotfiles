@@ -30,17 +30,14 @@ You need to convert to Bash Script Executable file all scripts located in [scrip
 $ chmod u+x ./scripts/*.sh
 ```
 
-## Installation
+### Installation
 
 ```
 $ ./scripts/install.sh
 ```
 
-## Uninstallation
+### Uninstallation
 
 ```
 $ ./scripts/uninstall.sh
 ```
-
-### Plugins
-* [Oh my Zsh](https://ohmyz.sh/) / [Oh my Bash](https://ohmybash.nntoan.com/) - Prompt theme engine for Unix operative systems
