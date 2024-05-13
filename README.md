@@ -3,15 +3,27 @@
 ## Windows setup
 
 ### Requeriments
-* [Git](https://git-scm.com/)
-* [Chocolatey](https://chocolatey.org/) (Only for Windows users)
 * PowerShell >= 7.3.0
 
-### Plugins
-* [PSReadLine](https://github.com/PowerShell/PSReadLine) - Cmdlets for customizing the editing environment, used for autocompletion
-* [Oh My Posh](https://ohmyposh.dev/) - Prompt theme engine
+#### Installation
 
-**Note:** My themes for [Oh My Posh](https://ohmyposh.dev/) are located in [themes](/windows/themes) folder
+> **Installation including all targets**
+
+```shell
+$ .\windows\setup.ps1
+```
+
+> **Installation of a specific target**
+
+```shell
+$ .\windows\setup.ps1 <target>
+```
+
+> **List of all targets available**
+
+```shell
+$ .\windows\setup.ps1 help
+```
 
 ## Unix setup
 Dotfiles (un)installation are managed by scripts located un [scripts](/scripts/) folder, you need to convert the script file you want to execute as Bash Script Executable file.
