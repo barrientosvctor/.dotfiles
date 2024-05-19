@@ -1,0 +1,30 @@
+[font]
+size = 15
+
+[env]
+TERM = "xterm-256color"
+
+[font.normal]
+family = "Cascadia Code"
+
+[shell]
+program = "pwsh"
+args = ["-NoLogo", "-NoExit", "-Command", "cd ~" ]
+
+[[keyboard.bindings]]
+action = "CreateNewWindow"
+key = "N"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Command"
+
+[window]
+opacity = 1
