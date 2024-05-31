@@ -16,16 +16,6 @@ action = "CreateNewWindow"
 key = "t"
 mods = "Alt"
 
-[[keyboard.bindings]]
-action = "Paste"
-key = "V"
-mods = "Command"
-
-[[keyboard.bindings]]
-action = "Copy"
-key = "C"
-mods = "Command"
-
 [window]
 opacity = 1
 startup_mode = "Fullscreen"
