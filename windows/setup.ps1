@@ -5,10 +5,6 @@ Param(
 $Targets = @('help', 'modules', 'alacritty', 'symlink', 'all')
 $ListOfTargets = $Targets.foreach({"`n-> $PSItem"})
 
-if ($Target -eq "") {
-    $Target = "all"
-}
-
 function PS_InstallModules {
     Write-Host "Installing PSReadLine..."
     Install-Module PSReadLine
