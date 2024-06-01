@@ -129,7 +129,14 @@ function Dotfiles_PS_SetupAlacrittyConfigFile {
 }
 
 function Dotfiles_PS_SetupSymlinks {
-    New-Item -Path "$env:HOMEPATH\.gitconfig" -ItemType SymbolicLink -Value "$PWD\.gitconfig"
+    $processCount = 0
+
+    if (-not (Test-Path -Path "$env:HOMEPATH\.gitconfig")) {
+        New-Item -Path "$env:HOMEPATH\.gitconfig" -ItemType SymbolicLink -Value "$PWD\.gitconfig"
+        $processCount++
+    }
+
+    Dotfiles_PS_CountChanges -Count $processCount -ProcessName "Symlink"
 }
 
 # Used to when `help` target is matched.
