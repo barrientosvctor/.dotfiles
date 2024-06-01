@@ -2,7 +2,7 @@ Param(
     [string]$Target
 )
 
-$Targets = @('help', 'alacritty', 'symlink', 'all')
+$Targets = @('help', 'modules', 'alacritty', 'symlink', 'all')
 $ListOfTargets = $Targets.foreach({"`n-> $PSItem"})
 
 if ($Target -eq "") {
@@ -39,6 +39,7 @@ switch -Exact ($Target) {
         Write-Host "Usage: .\setup.ps1 -Target <target>"
         Write-Host "Available targets: $ListOfTargets"
     }
+    { $_ -eq "modules" } { PS_InstallModules }
     { $_ -eq "alacritty" } { PS_SetupAlacrittyConfigFile }
     { $_ -eq "symlink" } { PS_SetupSymlinks }
     { $_ -eq "all" } {
