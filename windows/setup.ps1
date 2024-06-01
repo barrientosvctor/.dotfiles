@@ -102,7 +102,7 @@ function Internal_Dotfiles_PS_FontInstaller {
 function Dotfiles_PS_InstallModules {
     Write-Host "Installing PSReadLine..."
     Install-Module PSReadLine
-    Install-Module "--> PSReadLine installed."
+    Write-Host "--> PSReadLine installed."
     Dotfiles_PS_CountChanges -Count -1 -ProcessName "Modules"
 }
 
