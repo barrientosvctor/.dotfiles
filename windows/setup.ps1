@@ -71,7 +71,11 @@ function Internal_Dotfiles_PS_FontInstaller {
     $CompressFontFile = "$DotfilesFontFolder\$FontName.$CompressFontFileExtension"
 
     $ResultingFontFolder = "$DotfilesFontFolder\$FontName"
-    $FontPathChildItem = "$ResultingFontFolder\$FontsPath\*"
+    $FontPathChildItem = "$ResultingFontFolder\*"
+
+    if (-not ($FontsPath -eq "")) {
+        $FontPathChildItem = "$ResultingFontFolder\$FontsPath\*"
+    }
 
     if (-Not (Test-Path -Path $DotfilesFontFolder)) {
         New-Item -ItemType Directory -Path $DotfilesFontFolder
