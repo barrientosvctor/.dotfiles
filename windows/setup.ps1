@@ -5,7 +5,7 @@ Param(
     [string]$Target
 )
 
-[int] $processCount = 0
+[int] $processCount
 
 ##! Modify this hash table every time a new target is needed to create.
 # 'targetName' = 'FunctionName'
@@ -108,6 +108,8 @@ function PS_InstallModules {
 
 # This function assumes you're located in dotfiles's root directory
 function PS_SetupAlacrittyConfigFile {
+    $processCount = 0
+
     [string]$Alacritty_Path = "$env:APPDATA\alacritty"
     [string]$Alacritty_File = "$env:APPDATA\alacritty\alacritty.toml"
 
@@ -124,7 +126,6 @@ function PS_SetupAlacrittyConfigFile {
     }
 
     PS_CountChanges -Count $processCount -ProcessName "Alacritty"
-    $processCount = 0
 }
 
 function PS_SetupSymlinks {
