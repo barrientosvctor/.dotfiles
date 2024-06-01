@@ -48,6 +48,57 @@ function PS_CountChanges {
     }
 }
 
+# This function should only be used into this script file.
+# This is the base function to install fonts.
+# The function assumes you are running the script on root dotfiles path.
+# -- Permissions of administrator required: NO
+function Internal_Dotfiles_PS_FontInstaller {
+    Param(
+        [Parameter(Mandatory, HelpMessage = "Type the URI of the font.")]
+        [string] $Uri,
+        [Parameter(Mandatory, HelpMessage = "Type the name you want for the resulting font's files and folders")]
+        [string] $FontName,
+        [Parameter(Mandatory=$false, HelpMessage = "Type the path where fonts are located. The input will be concatenated with the dotfiles's .fonts folder")]
+        [string] $FontsPath,
+        [Parameter(Mandatory=$false, HelpMessage = "Type a string of pattern of files you want to include separed by comma (,)")]
+        [string[]] $Includes,
+        [Parameter(Mandatory=$false, HelpMessage = "Type a string of pattern of files you want to exclude separed by comma (,)")]
+        [string[]] $Excludes
+     )
+
+    $DotfilesFontFolder = "$PWD\.fonts"
+    $CompressFontFileExtension = $Uri.Split(".")[-1] # Go to the last element in the array.
+    $CompressFontFile = "$DotfilesFontFolder\$FontName.$CompressFontFileExtension"
+
+    $ResultingFontFolder = "$DotfilesFontFolder\$FontName"
+    $FontPathChildItem = "$ResultingFontFolder\$FontsPath\*"
+
+    if (-Not (Test-Path -Path $DotfilesFontFolder)) {
+        New-Item -ItemType Directory -Path $DotfilesFontFolder
+        $processCount++
+    }
+
+    if (-not (Test-Path -Path $CompressFontFile)) {
+        # Installs the zip with all font variants
+        Invoke-WebRequest -Uri $Uri -OutFile $CompressFontFile
+        $processCount++
+    }
+
+    if (-not (Test-Path -Path $ResultingFontFolder)) {
+        # Unzip the font zip
+        Expand-Archive -Path $CompressFontFile -DestinationPath $ResultingFontFolder
+        $processCount++
+    }
+
+    Get-ChildItem -Path $FontPathChildItem -Include $Includes -Exclude $Excludes | ForEach-Object {
+        if (-not (Test-Path -Path "C:\Windows\Fonts\$($_.Name)")) {
+            $Destination.CopyHere($_.FullName, 0x10)
+            Write-Host "'$($_.Name)' installed."
+            $processCount++
+        }
+    }
+}
+
 function PS_InstallModules {
     Write-Host "Installing PSReadLine..."
     Install-Module PSReadLine
