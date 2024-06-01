@@ -12,7 +12,7 @@
 > **Installation including all targets**
 
 ```shell
-$ .\windows\setup.ps1
+$ .\windows\setup.ps1 all
 ```
 
 > **Installation of a specific target**
