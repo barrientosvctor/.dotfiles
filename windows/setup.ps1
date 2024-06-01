@@ -66,6 +66,9 @@ function Internal_Dotfiles_PS_FontInstaller {
         [string[]] $Excludes
      )
 
+    # Special folders in powershell: https://richardspowershellblog.wordpress.com/2008/03/20/special-folders/
+    $SystemFontPath = (New-Object -ComObject Shell.Application).Namespace(0x14)
+
     $DotfilesFontFolder = "$PWD\.fonts"
     $CompressFontFileExtension = $Uri.Split(".")[-1] # Go to the last element in the array.
     $CompressFontFile = "$DotfilesFontFolder\$FontName.$CompressFontFileExtension"
@@ -96,7 +99,7 @@ function Internal_Dotfiles_PS_FontInstaller {
 
     Get-ChildItem -Path $FontPathChildItem -Include $Includes -Exclude $Excludes | ForEach-Object {
         if (-not (Test-Path -Path "C:\Windows\Fonts\$($_.Name)")) {
-            $Destination.CopyHere($_.FullName, 0x10)
+            $SystemFontPath.CopyHere($_.FullName, 0x10)
             Write-Host "'$($_.Name)' installed."
             $processCount++
         }
