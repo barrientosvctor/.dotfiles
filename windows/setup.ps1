@@ -2,7 +2,7 @@ Param(
     [string]$Target
 )
 
-$Targets = @('help', 'alacritty', 'all')
+$Targets = @('help', 'alacritty', 'symlink', 'all')
 $ListOfTargets = $Targets.foreach({"`n-> $PSItem"})
 
 if ($Target -eq "") {
@@ -30,15 +30,21 @@ function PS_SetupAlacrittyConfigFile {
     }
 }
 
+function PS_SetupSymlinks {
+        New-Item -Path "$PWD\.gitconfig" -ItemType SymbolicLink -Value "$env:HOMEPATH\.gitconfig"
+}
+
 switch -Exact ($Target) {
     { $_ -eq "help" } {
         Write-Host "Usage: .\setup.ps1 -Target <target>"
         Write-Host "Available targets: $ListOfTargets"
     }
     { $_ -eq "alacritty" } { PS_SetupAlacrittyConfigFile }
+    { $_ -eq "symlink" } { PS_SetupSymlinks }
     { $_ -eq "all" } {
         PS_InstallModules
         PS_SetupAlacrittyConfigFile
+        PS_SetupSymlinks
     }
     Default {
         Write-Host "Unrecognized target. Available targets: $ListOfTargets"
