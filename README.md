@@ -1,13 +1,15 @@
 # Victor's dotfiles
 
+## Notes
+- Make sure to run the script on a terminal with administrator permissions.
+- Make sure to stay at dotfiles root path when running any script
+
 ## Windows setup
 
 ### Requeriments
 * PowerShell >= 7.3.0
 
-**Note**: Make sure to run the script on a terminal with administrator permissions.
-
-#### Installation
+### Installation
 
 > **Installation including all targets**
 
