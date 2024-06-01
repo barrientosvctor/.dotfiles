@@ -5,7 +5,7 @@ size = 16
 TERM = "xterm-256color"
 
 [font.normal]
-family = "JetBrainsMono NFM"
+family = "JetBrainsMono NF"
 style = "Bold"
 
 [shell]
