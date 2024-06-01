@@ -82,26 +82,26 @@ function Internal_Dotfiles_PS_FontInstaller {
 
     if (-Not (Test-Path -Path $DotfilesFontFolder)) {
         New-Item -ItemType Directory -Path $DotfilesFontFolder
-        $processCount++
+        $processCount = $processCount + 1
     }
 
     if (-not (Test-Path -Path $CompressFontFile)) {
         # Installs the zip with all font variants
         Invoke-WebRequest -Uri $Uri -OutFile $CompressFontFile
-        $processCount++
+        $processCount = $processCount + 1
     }
 
     if (-not (Test-Path -Path $ResultingFontFolder)) {
         # Unzip the font zip
         Expand-Archive -Path $CompressFontFile -DestinationPath $ResultingFontFolder
-        $processCount++
+        $processCount = $processCount + 1
     }
 
     Get-ChildItem -Path $FontPathChildItem -Include $Includes -Exclude $Excludes | ForEach-Object {
         if (-not (Test-Path -Path "C:\Windows\Fonts\$($_.Name)")) {
             $SystemFontPath.CopyHere($_.FullName, 0x10)
             Write-Host "'$($_.Name)' installed."
-            $processCount++
+            $processCount = $processCount + 1
         }
     }
 }
@@ -140,7 +140,7 @@ function Dotfiles_PS_SetupSymlinks {
 
     if (-not (Test-Path -Path "$env:HOMEPATH\.gitconfig")) {
         New-Item -Path "$env:HOMEPATH\.gitconfig" -ItemType SymbolicLink -Value "$PWD\.gitconfig"
-        $processCount++
+        $processCount = $processCount + 1
     }
 
     Dotfiles_PS_CountChanges -Count $processCount -ProcessName "Symlink"
