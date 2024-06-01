@@ -11,11 +11,11 @@ Param(
 # 'targetName' = 'FunctionName'
 # When the input matches with some key in the hash table, the function name passed as value will be invoke.
 $hashTableTargets = @{
-    'all' = "PS_InvokeAllTargets";
-    'help' = "PS_ShowScriptInfo";
-    'modules' = "PS_InstallModules";
-    'alacritty' = "PS_SetupAlacrittyConfigFile";
-    'symlink' = "PS_SetupSymlinks";
+    'all' = "Dotfiles_PS_InvokeAllTargets";
+    'help' = "Dotfiles_PS_ShowScriptInfo";
+    'modules' = "Dotfiles_PS_InstallModules";
+    'alacritty' = "Dotfiles_PS_SetupAlacrittyConfigFile";
+    'symlink' = "Dotfiles_PS_SetupSymlinks";
 }
 
 # Formats the hash table to a comprehensible string
@@ -23,14 +23,14 @@ $availableTargets = $hashTableTargets.Keys.ForEach({"`n-> $PSItem"})
 
 # Used to when `all` target is matched.
 ##! Modify it when a new target function is created.
-function PS_InvokeAllTargets {
-    PS_InstallModules
-    PS_SetupAlacrittyConfigFile
-    PS_SetupSymlinks
+function Dotfiles_PS_InvokeAllTargets {
+    Dotfiles_PS_InstallModules
+    Dotfiles_PS_SetupAlacrittyConfigFile
+    Dotfiles_PS_SetupSymlinks
 }
 
 # Used to show the amount of changes made in a target.
-function PS_CountChanges {
+function Dotfiles_PS_CountChanges {
     param(
         [Parameter(Mandatory)]
         [int]$Count,
@@ -99,15 +99,15 @@ function Internal_Dotfiles_PS_FontInstaller {
     }
 }
 
-function PS_InstallModules {
+function Dotfiles_PS_InstallModules {
     Write-Host "Installing PSReadLine..."
     Install-Module PSReadLine
     Install-Module "--> PSReadLine installed."
-    PS_CountChanges -Count -1 -ProcessName "Modules"
+    Dotfiles_PS_CountChanges -Count -1 -ProcessName "Modules"
 }
 
 # This function assumes you're located in dotfiles's root directory
-function PS_SetupAlacrittyConfigFile {
+function Dotfiles_PS_SetupAlacrittyConfigFile {
     $processCount = 0
 
     [string]$Alacritty_Path = "$env:APPDATA\alacritty"
@@ -125,15 +125,15 @@ function PS_SetupAlacrittyConfigFile {
         $processCount = $processCount + 1
     }
 
-    PS_CountChanges -Count $processCount -ProcessName "Alacritty"
+    Dotfiles_PS_CountChanges -Count $processCount -ProcessName "Alacritty"
 }
 
-function PS_SetupSymlinks {
+function Dotfiles_PS_SetupSymlinks {
     New-Item -Path "$env:HOMEPATH\.gitconfig" -ItemType SymbolicLink -Value "$PWD\.gitconfig"
 }
 
 # Used to when `help` target is matched.
-function PS_ShowScriptInfo {
+function Dotfiles_PS_ShowScriptInfo {
     Write-Host "Usage: .\setup.ps1 -Target <target>"
     Write-Host "Available targets: $availableTargets"
 }
