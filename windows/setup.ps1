@@ -25,8 +25,8 @@ function PS_SetupAlacrittyConfigFile {
     }
 
     if (-Not (Test-Path -Path "$Alacritty_Path\alacritty.toml")) {
-        Write-Host "'$Alacritty_File' not found. Copying..."
-        Copy-Item -Path "$PWD\.config\alacritty\alacritty.toml" -Destination $Alacritty_File
+        Write-Host "'$Alacritty_File' not found. Creating a symlink..."
+        New-Item -Path $Alacritty_File -ItemType SymbolicLink -Value "$PWD\.config\alacritty\alacritty.toml"
     }
 }
 
