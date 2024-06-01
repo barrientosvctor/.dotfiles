@@ -1,11 +1,12 @@
 [font]
-size = 15
+size = 16
 
 [env]
 TERM = "xterm-256color"
 
 [font.normal]
-family = "Roboto Mono"
+family = "JetBrainsMono NFM"
+style = "Bold"
 
 [shell]
 program = "pwsh"
