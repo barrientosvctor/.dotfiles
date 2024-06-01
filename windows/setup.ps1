@@ -1,7 +1,7 @@
 Param(
     # Target passed as input.
     ##! Modify the help message when a new target is created.
-    [Parameter(Mandatory, HelpMessage = 'Targets: all, help, modules, alacritty, symlink' )]
+    [Parameter(Mandatory, HelpMessage = 'Targets: all, help, modules, alacritty, symlink, fonts' )]
     [string]$Target
 )
 
@@ -16,6 +16,7 @@ $hashTableTargets = @{
     'modules' = "Dotfiles_PS_InstallModules";
     'alacritty' = "Dotfiles_PS_SetupAlacrittyConfigFile";
     'symlink' = "Dotfiles_PS_SetupSymlinks";
+    'fonts' = "Dotfiles_PS_InstallFonts";
 }
 
 # Formats the hash table to a comprehensible string
@@ -25,6 +26,7 @@ $availableTargets = $hashTableTargets.Keys.ForEach({"`n-> $PSItem"})
 ##! Modify it when a new target function is created.
 function Dotfiles_PS_InvokeAllTargets {
     Dotfiles_PS_InstallModules
+    Dotfiles_PS_InstallFonts
     Dotfiles_PS_SetupAlacrittyConfigFile
     Dotfiles_PS_SetupSymlinks
 }
@@ -111,6 +113,20 @@ function Dotfiles_PS_InstallModules {
     Install-Module PSReadLine
     Write-Host "--> PSReadLine installed."
     Dotfiles_PS_CountChanges -Count -1 -ProcessName "Modules"
+}
+
+function Dotfiles_PS_InstallFonts {
+    $processCount = 0
+    Internal_Dotfiles_PS_FontInstaller -Uri "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip" -FontName "jetbrainsmono" -Includes "JetBrainsMonoNerdFont-*.ttf"
+    Dotfiles_PS_CountChanges -Count $processCount -ProcessName "JetBrains Mono font"
+
+    $processCount = 0
+    Internal_Dotfiles_PS_FontInstaller -Uri "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Iosevka.zip" -FontName "iosevka" -Includes "IosevkaNerdFont-*.ttf"
+    Dotfiles_PS_CountChanges -Count $processCount -ProcessName "Iosevka font"
+
+    $processCount = 0
+    Internal_Dotfiles_PS_FontInstaller -Uri "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip" -FontName "firacode" -Includes "FiraCodeNerdFont-*.ttf"
+    Dotfiles_PS_CountChanges -Count $processCount -ProcessName "Fira Code font"
 }
 
 # This function assumes you're located in dotfiles's root directory
