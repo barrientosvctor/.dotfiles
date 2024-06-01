@@ -31,7 +31,7 @@ function PS_SetupAlacrittyConfigFile {
 }
 
 function PS_SetupSymlinks {
-        New-Item -Path "$PWD\.gitconfig" -ItemType SymbolicLink -Value "$env:HOMEPATH\.gitconfig"
+    New-Item -Path "$env:HOMEPATH\.gitconfig" -ItemType SymbolicLink -Value "$PWD\.gitconfig"
 }
 
 switch -Exact ($Target) {
