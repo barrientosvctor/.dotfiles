@@ -5,6 +5,8 @@
 ### Requeriments
 * PowerShell >= 7.3.0
 
+**Note**: Make sure to run the script on a terminal with administrator permissions.
+
 #### Installation
 
 > **Installation including all targets**
