@@ -116,6 +116,7 @@ function Internal_Dotfiles_PS_FontInstaller {
     }
 }
 
+# Checks if the module was installed before with `Install-Module`, if not, installs it.
 function Internal_Dotfiles_PS_CheckAndInstallModule {
     Param(
         [Parameter(Mandatory, HelpMessage = "The module's name.")]
@@ -130,12 +131,40 @@ function Internal_Dotfiles_PS_CheckAndInstallModule {
     }
 }
 
+# Installs winget packages
+function Internal_Dotfiles_PS_CheckAndInstallWinGetPackage {
+    Param(
+        [Parameter(Mandatory, HelpMessage = "The winget package's id.")]
+        [string] $PackageId
+     )
+
+    $searchResult = winget.exe list --id --exact $PackageId
+    $matchPackageId = $searchResult | Select-String $searchResult
+
+    # If winget package was not found. Install it
+    if ($null -eq $matchPackageId) {
+        Write-Host "Installing $PackageId..."
+        winget.exe install --id=$PackageId -e
+        Write-Host "--> $PackageId installed."
+        $processcount = $processcount + 1
+    }
+}
+
 function Dotfiles_PS_InstallModules {
     $processcount = 0
 
     # If not running this script on powershell core >= 7.4
     if (-not ($PSVersionTable.PSEdition -eq "Core" -and $PSVersionTable.PSVersion.Major -ge 7 -and $PSVersionTable.PSVersion.Minor -ge 4)) {
         Internal_Dotfiles_PS_CheckAndInstallModule -ModuleName PSReadLine
+    }
+
+    Internal_Dotfiles_PS_CheckAndInstallModule -ModuleName PSFzf
+
+    if (Get-Command winget.exe) {
+        Internal_Dotfiles_PS_CheckAndInstallWinGetPackage -PackageId "junegunn.fzf"
+    } else {
+        Write-Warning "!!--> Winget binary couldn't found. I'll omit the winget packages instalation."
+        Write-Warning "!!--> Once you get the winget binary came back to run this target."
     }
 
     Dotfiles_PS_CountChanges -Count $processCount -ProcessName "Modules"
