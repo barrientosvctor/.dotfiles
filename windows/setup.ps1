@@ -50,11 +50,11 @@ function Dotfiles_PS_CountChanges {
      )
 
     if ($Count -eq 0) {
-        Write-Host "--> There were no changes in $ProcessName process. <--"
+        Write-Host "--> There were no changes in $ProcessName process. <--" -ForegroundColor Green
     } elseif ($Count -gt 0) {
-        Write-Host "--> $ProcessName process successfully executed with $Count changes. <--"
+        Write-Host "--> $ProcessName process successfully executed with $Count changes. <--" -Foregr Green
     } else {
-        Write-Host "--> $ProcessName process successfully executed with unknown number of changes. <--"
+        Write-Host "--> $ProcessName process successfully executed with unknown number of changes. <--" -Foregr Green
     }
 }
 
@@ -110,7 +110,7 @@ function Internal_Dotfiles_PS_FontInstaller {
     Get-ChildItem -Path $FontPathChildItem -Include $Includes -Exclude $Excludes | ForEach-Object {
         if (-not (Test-Path -Path "C:\Windows\Fonts\$($_.Name)")) {
             $SystemFontPath.CopyHere($_.FullName, 0x10)
-            Write-Host "'$($_.Name)' installed."
+            Write-Host "'$($_.Name)' installed." -ForegroundColor Green
             $processCount = $processCount + 1
         }
     }
@@ -124,9 +124,9 @@ function Internal_Dotfiles_PS_CheckAndInstallModule {
      )
 
     if ($null -eq (Get-Module $ModuleName)) {
-        Write-Host "Installing $ModuleName..."
+        Write-Host "Installing $ModuleName..." -ForegroundColor DarkCyan
         Install-Module $ModuleName
-        Write-Host "--> $ModuleName installed."
+        Write-Host "--> $ModuleName installed." -ForegroundColor Green
         $processCount = $processCount + 1
     }
 }
@@ -143,9 +143,9 @@ function Internal_Dotfiles_PS_CheckAndInstallWinGetPackage {
 
     # If winget package was not found. Install it
     if ($null -eq $matchPackageId) {
-        Write-Host "Installing $PackageId..."
+        Write-Host "Installing $PackageId..." -ForegroundColor DarkCyan
         winget.exe install --id=$PackageId -e
-        Write-Host "--> $PackageId installed."
+        Write-Host "--> $PackageId installed." -ForegroundColor Green
         $processCount = $processCount + 1
     }
 }
@@ -176,14 +176,14 @@ function Dotfiles_PS_SetupPSProfile {
     $psConfigPath = Split-Path $PROFILE.CurrentUserCurrentHost
 
     if (-not (Test-Path -Path $psConfigPath)) {
-        Write-Host "'$psConfigPath' directory not found, creating..."
+        Write-Host "'$psConfigPath' directory not found, creating..." -ForegroundColor Cyan
         New-Item -ItemType Directory -Path $psConfigPath
         $processCount = $processCount + 1
     }
 
     # PROFILE is the path of the powershell config file.
     if (-not (Test-Path -Path $PROFILE -PathType Leaf)) {
-        Write-Host "'$PROFILE' not found, making a symlink..."
+        Write-Host "'$PROFILE' not found, making a symlink..." -ForegroundColor Cyan
         New-Item -ItemType SymbolicLink -Path $PROFILE -Value "$PWD\windows\Microsoft.PowerShell_profile.ps1"
         $processCount = $processCount + 1
     }
@@ -213,13 +213,13 @@ function Dotfiles_PS_SetupAlacrittyConfigFile {
     [string]$Alacritty_File = "$env:APPDATA\alacritty\alacritty.toml"
 
     if (-Not (Test-Path -Path $Alacritty_Path)) {
-        Write-Host "'$Alacritty_Path' not found. Creating..."
+        Write-Host "'$Alacritty_Path' not found. Creating..." -ForegroundColor Cyan
         New-Item -ItemType Directory -Path $Alacritty_Path
         $processCount = $processCount + 1
     }
 
     if (-Not (Test-Path -Path "$Alacritty_Path\alacritty.toml")) {
-        Write-Host "'$Alacritty_File' not found. Creating a symlink..."
+        Write-Host "'$Alacritty_File' not found. Creating a symlink..." -ForegroundColor Cyan
         New-Item -Path $Alacritty_File -ItemType SymbolicLink -Value "$PWD\.config\alacritty\alacritty.toml"
         $processCount = $processCount + 1
     }
@@ -247,5 +247,5 @@ function Dotfiles_PS_ShowScriptInfo {
 if ($hashTableTargets.ContainsKey($Target)) {
     Invoke-Expression -Command $hashTableTargets[$Target]
 } else {
-    Write-Host "Unrecognized target. Available targets: $availableTargets"
+    Write-Host "Unrecognized target. Available targets: $availableTargets" -ForegroundColor Gray
 }
