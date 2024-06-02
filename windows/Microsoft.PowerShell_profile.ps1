@@ -19,6 +19,10 @@ function admin {
     }
 }
 
+function touch ($file) {
+    "" | Out-File $file -Encoding ascii
+}
+
 # ======= MODULE IMPORTS =======
 
 # If it's running on powershell not core, with version less than 7 and exists a module named 'PSReadLine' installed.
