@@ -5,6 +5,12 @@ Param(
     [string]$Target
 )
 
+# Ensure the script can run with elevated privileges
+if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+    Write-Warning "Please run this script as an Administrator!"
+    break
+}
+
 [int] $processCount
 
 ##! Modify this hash table every time a new target is needed to create.
