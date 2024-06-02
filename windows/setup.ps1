@@ -123,7 +123,7 @@ function Internal_Dotfiles_PS_CheckAndInstallModule {
         [string] $ModuleName
      )
 
-    if ($null -eq (Get-Module $ModuleName)) {
+    if ($null -eq (Get-Module $ModuleName -ListAvailable)) {
         Write-Host "Installing $ModuleName..." -ForegroundColor DarkCyan
         Install-Module $ModuleName
         Write-Host "--> $ModuleName installed." -ForegroundColor Green
