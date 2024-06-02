@@ -139,7 +139,7 @@ function Internal_Dotfiles_PS_CheckAndInstallWinGetPackage {
      )
 
     $searchResult = winget.exe list --id --exact $PackageId
-    $matchPackageId = $searchResult | Select-String $searchResult
+    $matchPackageId = $searchResult | Select-String $PackageId
 
     # If winget package was not found. Install it
     if ($null -eq $matchPackageId) {
