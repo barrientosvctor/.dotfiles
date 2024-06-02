@@ -1,7 +1,7 @@
 Param(
     # Target passed as input.
     ##! Modify the help message when a new target is created.
-    [Parameter(Mandatory, HelpMessage = 'Targets: all, help, modules, alacritty, symlink, fonts' )]
+    [Parameter(Mandatory, HelpMessage = 'Targets: all, help, modules, alacritty, symlink, fonts, profile' )]
     [string]$Target
 )
 
@@ -23,6 +23,7 @@ $hashTableTargets = @{
     'alacritty' = "Dotfiles_PS_SetupAlacrittyConfigFile";
     'symlink' = "Dotfiles_PS_SetupSymlinks";
     'fonts' = "Dotfiles_PS_InstallFonts";
+    'profile' = "Dotfiles_PS_SetupPSProfile";
 }
 
 # Formats the hash table to a comprehensible string
@@ -34,6 +35,7 @@ function Dotfiles_PS_InvokeAllTargets {
     Dotfiles_PS_InstallModules
     Dotfiles_PS_InstallFonts
     Dotfiles_PS_SetupAlacrittyConfigFile
+    Dotfiles_PS_SetupPSProfile
     Dotfiles_PS_SetupSymlinks
 }
 
@@ -119,6 +121,27 @@ function Dotfiles_PS_InstallModules {
     Install-Module PSReadLine
     Write-Host "--> PSReadLine installed."
     Dotfiles_PS_CountChanges -Count -1 -ProcessName "Modules"
+}
+
+# Make a symbolic link to the powershell config
+function Dotfiles_PS_SetupPSProfile {
+    $processCount = 0
+    $psConfigPath = Split-Path $PROFILE.CurrentUserCurrentHost
+
+    if (-not (Test-Path -Path $psConfigPath)) {
+        Write-Host "'$psConfigPath' directory not found, creating..."
+        New-Item -ItemType Directory -Path $psConfigPath
+        $processCount = $processCount + 1
+    }
+
+    # PROFILE is the path of the powershell config file.
+    if (-not (Test-Path -Path $PROFILE -PathType Leaf)) {
+        Write-Host "'$PROFILE' not found, making a symlink..."
+        New-Item -ItemType SymbolicLink -Path $PROFILE -Value "$PWD\windows\Microsoft.PowerShell_profile.ps1"
+        $processCount = $processCount + 1
+    }
+
+    Dotfiles_PS_CountChanges -Count $processCount -ProcessName "Powershell profile"
 }
 
 function Dotfiles_PS_InstallFonts {
