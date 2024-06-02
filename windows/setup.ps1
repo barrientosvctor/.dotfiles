@@ -117,14 +117,19 @@ function Internal_Dotfiles_PS_FontInstaller {
 }
 
 function Dotfiles_PS_InstallModules {
+    $processcount = 0
+
     # If not running this script on powershell core >= 7.4
     if (-not ($PSVersionTable.PSEdition -eq "Core" -and $PSVersionTable.PSVersion.Major -ge 7 -and $PSVersionTable.PSVersion.Minor -ge 4)) {
-        Write-Host "Installing PSReadLine..."
-        Install-Module PSReadLine
-        Write-Host "--> PSReadLine installed."
+        if ($null -eq (Get-Module PSReadLine)) {
+            Write-Host "Installing PSReadLine..."
+            Install-Module PSReadLine
+            Write-Host "--> PSReadLine installed."
+            $processcount = $processcount + 1
+        }
     }
 
-    Dotfiles_PS_CountChanges -Count -1 -ProcessName "Modules"
+    Dotfiles_PS_CountChanges -Count $processCount -ProcessName "Modules"
 }
 
 # Make a symbolic link to the powershell config
