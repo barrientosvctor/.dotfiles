@@ -32,13 +32,15 @@ if (-not ($PSVersionTable.PSEdition -eq "Core" -and $PSVersionTable.PSVersion.Ma
     }
 }
 
+Import-Module PSFzf
+
 # ======= MODULE CONFIG =======
-# PSReadLine (Terminal autocompletation)
-Set-PSReadLineOption -EditMode Emacs
 Set-PSReadLineOption -BellStyle None
 Set-PSReadLineKeyHandler -Chord 'Ctrl+d' -Function DeleteChar
 Set-PSReadLineOption -PredictionSource History
 Set-PSReadLineOption -PredictionViewStyle ListView
+
+Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory 'Ctrl+r'
 
 # ======= ALIASES =======
 Set-Alias -Name l -Value ls
