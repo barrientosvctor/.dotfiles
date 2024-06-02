@@ -6,5 +6,6 @@ Set-PSReadLineKeyHandler -Chord 'Ctrl+d' -Function DeleteChar
 Set-PSReadLineOption -PredictionSource History
 
 # Alias
-Set-Alias ll ls
-Set-Alias g git
+Set-Alias -Name l -Value ls
+Set-Alias -Name g -Value git
+Set-Alias -Name v -Value nvim
