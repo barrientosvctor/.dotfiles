@@ -7,7 +7,7 @@
 ## Windows setup
 
 ### Requeriments
-* PowerShell >= 7.3.0
+* PowerShell >= 5.1.*
 
 ### Installation
 
