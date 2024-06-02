@@ -162,6 +162,7 @@ function Dotfiles_PS_InstallModules {
 
     if (Get-Command winget.exe) {
         Internal_Dotfiles_PS_CheckAndInstallWinGetPackage -PackageId "junegunn.fzf"
+        Internal_Dotfiles_PS_CheckAndInstallWinGetPackage -PackageId "Git.Git"
     } else {
         Write-Warning "!!--> Winget binary couldn't found. I'll omit the winget packages instalation."
         Write-Warning "!!--> Once you get the winget binary came back to run this target."
