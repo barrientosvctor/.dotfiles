@@ -127,7 +127,7 @@ function Internal_Dotfiles_PS_CheckAndInstallModule {
         Write-Host "Installing $ModuleName..."
         Install-Module $ModuleName
         Write-Host "--> $ModuleName installed."
-        $processcount = $processcount + 1
+        $processCount = $processCount + 1
     }
 }
 
@@ -146,12 +146,12 @@ function Internal_Dotfiles_PS_CheckAndInstallWinGetPackage {
         Write-Host "Installing $PackageId..."
         winget.exe install --id=$PackageId -e
         Write-Host "--> $PackageId installed."
-        $processcount = $processcount + 1
+        $processCount = $processCount + 1
     }
 }
 
 function Dotfiles_PS_InstallModules {
-    $processcount = 0
+    $processCount = 0
 
     # If not running this script on powershell core >= 7.4
     if (-not ($PSVersionTable.PSEdition -eq "Core" -and $PSVersionTable.PSVersion.Major -ge 7 -and $PSVersionTable.PSVersion.Minor -ge 4)) {
