@@ -31,6 +31,34 @@ $hashTableTargets = @{
 # Formats the hash table to a comprehensible string
 $availableTargets = $hashTableTargets.Keys.ForEach({"`n-> $PSItem"})
 
+# Take care of the edition of powershell you're executing the script to invoke a new terminal with the same type of edition.
+function Internal_Dotfiles_PS_InvokeTerminal {
+    Param(
+            [Parameter(Mandatory, HelpMessage="Put the commands you want to execute. To run more than one command, separate them by (;)")]
+            [string] $Command,
+            [Parameter(Mandatory=$false, HelpMessage="Specify if the  new terminal instance must the interactive or not.")]
+            [bool] $Interactive
+         )
+
+    if (-not ($Interactive -eq $true)) {
+        $Interactive = $false
+    }
+
+    if ($PSVersionTable.PSEdition -eq "Core") {
+        if ($Interactive -eq $true) {
+            pwsh.exe -Interactive -NoLogo -Command $Command
+        } else {
+            pwsh.exe -NonInteractive -NoLogo -Command $Command
+        }
+    } elseif ($PSVersionTable.PSEdition -eq "Desktop") {
+        if ($Interactive -eq $true) {
+            powershell.exe -Interactive -NoLogo -Command $Command
+        } else {
+            powershell.exe -NonInteractive -NoLogo -Command $Command
+        }
+    }
+}
+
 # Used to when `all` target is matched.
 ##! Modify it when a new target function is created.
 function Dotfiles_PS_InvokeAllTargets {
@@ -139,7 +167,11 @@ function Internal_Dotfiles_PS_CheckAndInstallModule {
 function Internal_Dotfiles_PS_CheckAndInstallWinGetPackage {
     Param(
         [Parameter(Mandatory, HelpMessage = "The winget package's id.")]
-        [string] $PackageId
+        [string] $PackageId,
+        [Parameter(Mandatory=$false, HelpMessage = "Specify other parameters to execute along winget.")]
+        [string] $AdditionalWingetParameters,
+        [Parameter(Mandatory=$false, HelpMessage = "Specify if the  new terminal instance must the interactive or not.")]
+        [bool] $InteractiveTerminal
      )
 
     $searchResult = winget.exe list --id --exact $PackageId
@@ -148,7 +180,7 @@ function Internal_Dotfiles_PS_CheckAndInstallWinGetPackage {
     # If winget package was not found. Install it
     if ($null -eq $matchPackageId) {
         Write-Host "Installing $PackageId..." -ForegroundColor DarkCyan
-        winget.exe install --id=$PackageId -e
+        Internal_Dotfiles_PS_InvokeTerminal -Command "winget.exe install --id=$PackageId -e $AdditionalWingetParameters" -Interactive $InteractiveTerminal
         Write-Host "--> $PackageId installed." -ForegroundColor Green
         $processCount = $processCount + 1
     }
@@ -200,7 +232,7 @@ function Dotfiles_PS_SetupAndInstallVim {
     $processCount = 0
 
     if (Get-Command winget.exe) {
-        Internal_Dotfiles_PS_CheckAndInstallWinGetPackage -PackageId "vim.vim"
+        Internal_Dotfiles_PS_CheckAndInstallWinGetPackage -PackageId "vim.vim" -AdditionalWingetParameters "--interactive" -Interactive $true
     } else {
         Write-Warning "!!--> Winget binary couldn't found. I'll omit the winget packages installation."
         Write-Warning "!!--> Once you get the winget binary came back to run this target."
