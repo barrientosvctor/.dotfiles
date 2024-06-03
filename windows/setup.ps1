@@ -209,12 +209,27 @@ function Dotfiles_PS_SetupAndInstallVim {
     if (Get-Command git.exe) {
         $vimrcFolderName = "vimfiles"
         $vimrc = "$env:USERPROFILE\$vimrcFolderName"
+
+        # This condition is there because when winget installs vim, automatically creates a vimfiles directory.
+        # The intention is to remove that vimrc directory for then clone the correct vimrc directory.
+        # The statement also can be treated as a way to update the vimrc to the latest commit.
+        if (Test-Path -Path $vimrc) {
+            Write-Host "A vimrc directory was found! Removing..." -ForegroundColor Yellow
+            Remove-Item -Force -Recurse -Path $vimrc
+            $processCount = $processCount + 1
+        }
+
+        # This statement always should be executed and this will clone the correct vimrc.
         if (-not (Test-Path -Path $vimrc)) {
             Write-Host "'$vimrc' directory not found, cloning it using git..." -ForegroundColor Cyan
-            git.exe clone "https://github.com/barrientosvctor/vimrc.git" "$vimrc"
+            git.exe clone "https://github.com/barrientosvctor/vimrc.git" $vimrc
             Write-Host "--> Vim dotfiles cloned to '$vimrc'" -ForegroundColor Green
             $processCount = $processCount + 1
         }
+
+	    Write-Host "Installing vim submodules..." -ForegroundColor Cyan
+        powershell.exe -NoLogo -NonInteractive -Command "cd $vimrc; .\scripts\actions.ps1 -ActionNumber 1" || pwsh.exe -NoLogo -NonInteractive -Command "cd $vimrc; .\scripts\actions.ps1 -ActionNumber 1"
+        $processCount = $processCount + 1
     } else {
         Write-Warning "!!--> Git binary couldn't found. I'll omit the Vim dotfiles installation."
         Write-Warning "!!--> Once you get the Git binary came back to run this target."
