@@ -250,12 +250,21 @@ function Dotfiles_PS_SetupAndInstallNeovim {
 
     if (Get-Command git.exe) {
         $nvimconfigPath = "$env:LOCALAPPDATA\nvim"
+	    $nvimdataPath = "$env:LOCALAPPDATA\nvim-data"
         if (-not (Test-Path -Path $nvimconfigPath)) {
             Write-Host "'$nvimconfigPath' directory not found, cloning it using git..." -ForegroundColor Cyan
             git.exe clone "https://github.com/barrientosvctor/nvim.git" "$nvimconfigPath"
             Write-Host "--> Neovim dotfiles cloned to '$nvimconfigPath'" -ForegroundColor Green
             $processCount = $processCount + 1
         }
+
+	    if (Test-Path -Path $nvimdataPath) {
+		    Write-Host "I'll remove the Neovim directory '$nvimdataPath' to refresh the Neovim with dotfiles." -Foreground Magenta
+		    Remove-Item -Force -Recurse -Path $nvimdataPath
+		    $processCount = $processCount + 1
+
+		    Write-Host "Open Neovim after finish the script execution to install plugins." -Foreground Magenta
+	    }
     } else {
         Write-Warning "!!--> Git binary couldn't found. I'll omit the Neovim dotfiles installation."
         Write-Warning "!!--> Once you get the Git binary came back to run this target."
