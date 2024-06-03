@@ -1,7 +1,7 @@
 Param(
     # Target passed as input.
     ##! Modify the help message when a new target is created.
-    [Parameter(Mandatory, HelpMessage = 'Targets: all, help, modules, alacritty, symlink, fonts, profile, nvim' )]
+    [Parameter(Mandatory, HelpMessage = 'Targets: all, help, modules, alacritty, symlink, fonts, profile, nvim, vim' )]
     [string]$Target
 )
 
@@ -25,6 +25,7 @@ $hashTableTargets = @{
     'fonts' = "Dotfiles_PS_InstallFonts";
     'profile' = "Dotfiles_PS_SetupPSProfile";
     'nvim' = "Dotfiles_PS_SetupAndInstallNeovim";
+    'vim' = "Dotfiles_PS_SetupAndInstallVim";
 }
 
 # Formats the hash table to a comprehensible string
@@ -34,6 +35,7 @@ $availableTargets = $hashTableTargets.Keys.ForEach({"`n-> $PSItem"})
 ##! Modify it when a new target function is created.
 function Dotfiles_PS_InvokeAllTargets {
     Dotfiles_PS_InstallModules
+    Dotfiles_PS_SetupAndInstallVim
     Dotfiles_PS_SetupAndInstallNeovim
     Dotfiles_PS_InstallFonts
     Dotfiles_PS_SetupAlacrittyConfigFile
@@ -194,6 +196,33 @@ function Dotfiles_PS_SetupPSProfile {
     Dotfiles_PS_CountChanges -Count $processCount -ProcessName "Powershell profile"
 }
 
+function Dotfiles_PS_SetupAndInstallVim {
+    $processCount = 0
+
+    if (Get-Command winget.exe) {
+        Internal_Dotfiles_PS_CheckAndInstallWinGetPackage -PackageId "vim.vim"
+    } else {
+        Write-Warning "!!--> Winget binary couldn't found. I'll omit the winget packages installation."
+        Write-Warning "!!--> Once you get the winget binary came back to run this target."
+    }
+
+    if (Get-Command git.exe) {
+        $vimrcFolderName = "vimfiles"
+        $vimrc = "$env:USERPROFILE\$vimrcFolderName"
+        if (-not (Test-Path -Path $vimrc)) {
+            Write-Host "'$vimrc' directory not found, cloning it using git..." -ForegroundColor Cyan
+            git.exe clone "https://github.com/barrientosvctor/vimrc.git" "$vimrc"
+            Write-Host "--> Vim dotfiles cloned to '$vimrc'" -ForegroundColor Green
+            $processCount = $processCount + 1
+        }
+    } else {
+        Write-Warning "!!--> Git binary couldn't found. I'll omit the Vim dotfiles installation."
+        Write-Warning "!!--> Once you get the Git binary came back to run this target."
+    }
+
+    Dotfiles_PS_CountChanges -Count $processCount -ProcessName "Vim installation"
+}
+
 function Dotfiles_PS_SetupAndInstallNeovim {
     $processCount = 0
 
@@ -207,7 +236,7 @@ function Dotfiles_PS_SetupAndInstallNeovim {
     if (Get-Command git.exe) {
         $nvimconfigPath = "$env:LOCALAPPDATA\nvim"
         if (-not (Test-Path -Path $nvimconfigPath)) {
-            Write-Host "'$nvimconfigPath' directory not found, cloning using git..." -ForegroundColor Cyan
+            Write-Host "'$nvimconfigPath' directory not found, cloning it using git..." -ForegroundColor Cyan
             git.exe clone "https://github.com/barrientosvctor/nvim.git" "$nvimconfigPath"
             Write-Host "--> Neovim dotfiles cloned to '$nvimconfigPath'" -ForegroundColor Green
             $processCount = $processCount + 1
