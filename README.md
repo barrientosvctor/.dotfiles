@@ -63,3 +63,4 @@ $ ./scripts/uninstall.sh
 - [x] Make a neovim installation on windows script
 - [] Make font installation on unix script
 - [] Make a script to automate alacritty shell config depending the operative system
+- [] Add env variable from vim binaries directory to user scope in pwsh setup
