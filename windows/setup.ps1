@@ -232,7 +232,7 @@ function Dotfiles_PS_SetupAndInstallVim {
     $processCount = 0
 
     if (Get-Command winget.exe) {
-        Internal_Dotfiles_PS_CheckAndInstallWinGetPackage -PackageId "vim.vim" -AdditionalWingetParameters "--interactive" -Interactive $true
+        Internal_Dotfiles_PS_CheckAndInstallWinGetPackage -PackageId "vim.vim" -AdditionalWingetParameters "--interactive" -InteractiveTerminal $true
     } else {
         Write-Warning "!!--> Winget binary couldn't found. I'll omit the winget packages installation."
         Write-Warning "!!--> Once you get the winget binary came back to run this target."
