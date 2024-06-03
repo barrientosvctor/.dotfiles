@@ -1,7 +1,7 @@
 Param(
     # Target passed as input.
     ##! Modify the help message when a new target is created.
-    [Parameter(Mandatory, HelpMessage = 'Targets: all, help, modules, alacritty, symlink, fonts, profile' )]
+    [Parameter(Mandatory, HelpMessage = 'Targets: all, help, modules, alacritty, symlink, fonts, profile, nvim' )]
     [string]$Target
 )
 
@@ -24,6 +24,7 @@ $hashTableTargets = @{
     'symlink' = "Dotfiles_PS_SetupSymlinks";
     'fonts' = "Dotfiles_PS_InstallFonts";
     'profile' = "Dotfiles_PS_SetupPSProfile";
+    'nvim' = "Dotfiles_PS_SetupAndInstallNeovim";
 }
 
 # Formats the hash table to a comprehensible string
@@ -33,6 +34,7 @@ $availableTargets = $hashTableTargets.Keys.ForEach({"`n-> $PSItem"})
 ##! Modify it when a new target function is created.
 function Dotfiles_PS_InvokeAllTargets {
     Dotfiles_PS_InstallModules
+    Dotfiles_PS_SetupAndInstallNeovim
     Dotfiles_PS_InstallFonts
     Dotfiles_PS_SetupAlacrittyConfigFile
     Dotfiles_PS_SetupPSProfile
@@ -190,6 +192,29 @@ function Dotfiles_PS_SetupPSProfile {
     }
 
     Dotfiles_PS_CountChanges -Count $processCount -ProcessName "Powershell profile"
+}
+
+function Dotfiles_PS_SetupAndInstallNeovim {
+    $processCount = 0
+
+    if (Get-Command winget.exe) {
+        Internal_Dotfiles_PS_CheckAndInstallWinGetPackage -PackageId "Neovim.Neovim"
+    } else {
+        Write-Warning "!!--> Winget binary couldn't found. I'll omit the winget packages installation."
+        Write-Warning "!!--> Once you get the winget binary came back to run this target."
+    }
+
+    if (Get-Command git.exe) {
+        $nvimconfigPath = "$env:LOCALAPPDATA\nvim"
+        git.exe clone "https://github.com/barrientosvctor/nvim.git" "$nvimconfigPath"
+        Write-Host "--> Neovim dotfiles cloned to '$nvimconfigPath'" -ForegroundColor Green
+        $processCount = $processCount + 1
+    } else {
+        Write-Warning "!!--> Git binary couldn't found. I'll omit the Neovim dotfiles installation."
+        Write-Warning "!!--> Once you get the Git binary came back to run this target."
+    }
+
+    Dotfiles_PS_CountChanges -Count $processCount -ProcessName "Neovim installation"
 }
 
 function Dotfiles_PS_InstallFonts {
