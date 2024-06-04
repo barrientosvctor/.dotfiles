@@ -260,7 +260,7 @@ function Dotfiles_PS_SetupAndInstallVim {
         }
 
 	    Write-Host "Installing vim submodules..." -ForegroundColor Cyan
-        powershell.exe -NoLogo -NonInteractive -Command "cd $vimrc; .\scripts\actions.ps1 -ActionNumber 1" || pwsh.exe -NoLogo -NonInteractive -Command "cd $vimrc; .\scripts\actions.ps1 -ActionNumber 1"
+        Internal_Dotfiles_PS_InvokeTerminal -Command "cd $vimrc; .\scripts\actions.ps1 -ActionNumber 1"
         $processCount = $processCount + 1
     } else {
         Write-Warning "!!--> Git binary couldn't found. I'll omit the Vim dotfiles installation."
