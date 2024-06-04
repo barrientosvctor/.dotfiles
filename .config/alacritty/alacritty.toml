@@ -8,10 +8,6 @@ TERM = "xterm-256color"
 family = "JetBrainsMono NF"
 style = "Bold"
 
-[shell]
-program = "pwsh"
-args = ["-NoLogo", "-NoExit", "-Command", "cd ~" ]
-
 [[keyboard.bindings]]
 action = "CreateNewWindow"
 key = "t"
