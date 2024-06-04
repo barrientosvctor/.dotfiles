@@ -57,8 +57,8 @@ def make_toml_array(tpl: tuple):
 
     return array_literal
 
-def alacritty():
-    chosen_terminal_args = tuple(alacritty_terminal_args[os_option][shell_option])
+def alacritty(os_num: int, shell_num: int):
+    chosen_terminal_args = tuple(alacritty_terminal_args[os_num][shell_num])
     args = make_toml_array(chosen_terminal_args)
     alacritty_config_path = path.join(getcwd(), ".config", "alacritty", "alacritty.toml")
 
@@ -66,10 +66,8 @@ def alacritty():
         if f.writable():
             f.write("\n")
             f.write("[shell]\n")
-            f.write(f'program = "{shell_cmd[os_option][shell_option]}"\n')
+            f.write(f'program = "{shell_cmd[os_num][shell_num]}"\n')
             f.write("args = " + args + '\n')
-
-        print(f.read())
 
         if not f.closed:
             f.close()
@@ -90,4 +88,4 @@ while shell_option < 0 or shell_option > len(available_shells[os_option]):
     list_available_shell_by_os(os_option)
     shell_option = int(input("That option doesn't exists, choose another: "))
 
-alacritty()
+alacritty(os_option, shell_option)
