@@ -69,6 +69,7 @@ function Dotfiles_PS_InvokeAllTargets {
     Dotfiles_PS_SetupAlacrittyConfigFile
     Dotfiles_PS_SetupPSProfile
     Dotfiles_PS_SetupSymlinks
+    Write-Host "All targets were installed. Restart your computer to see the changes." -ForegroundColor White -BackgroundColor Green
 }
 
 # Used to show the amount of changes made in a target.
