@@ -23,6 +23,32 @@ function touch ($file) {
     "" | Out-File $file -Encoding ascii
 }
 
+function unzip {
+    Param(
+        [Parameter(Mandatory)]
+        [string]$filepath,
+        [Parameter(Mandatory=$false)]
+        [switch]$CreateDirectory
+     )
+
+    $pathResult = Get-ChildItem -Path $pwd -Filter $filepath
+
+    Write-Host "Extracting $filepath to $pwd..." -ForegroundColor DarkGray
+
+    $filename = $pathResult | ForEach-Object { $_.Name }
+    $fullfilepath = $pathResult | ForEach-Object { $_.FullName }
+
+    $name = $filename.Split(".")[0]
+
+    $destPath = $pwd
+
+    if ($CreateDirectory) {
+        $destPath = "$pwd\$name"
+    }
+
+    Expand-Archive -Path $fullfilepath -Destination $destPath
+}
+
 # ======= MODULE IMPORTS =======
 
 # If it's running on powershell not core, with version less than 7 and exists a module named 'PSReadLine' installed.
