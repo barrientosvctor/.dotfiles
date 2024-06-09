@@ -295,9 +295,11 @@ function Dotfiles_PS_SetupAndInstallNeovim {
 		    Write-Host "I'll remove the Neovim directory '$nvimdataPath' to refresh the Neovim with dotfiles." -Foreground Magenta
 		    Remove-Item -Force -Recurse -Path $nvimdataPath
 		    $processCount = $processCount + 1
-
-		    Write-Host "Open Neovim after finish the script execution to install plugins." -Foreground Magenta
 	    }
+
+	    Write-Host "Installing nvim submodules..." -ForegroundColor Cyan
+        Internal_Dotfiles_PS_InvokeTerminal -Command "cd $nvimconfigPath; .\scripts\actions.ps1 -Action 1"
+        $processCount = $processCount + 1
     } else {
         Write-Warning "!!--> Git binary couldn't found. I'll omit the Neovim dotfiles installation."
         Write-Warning "!!--> Once you get the Git binary came back to run this target."
