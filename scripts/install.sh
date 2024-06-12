@@ -9,6 +9,13 @@ setup_vimrc() {
 	make
 }
 
+setup_nvimrc() {
+	git clone https://github.com/barrientosvctor/nvim.git ~/.config/nvim
+	cd ~/.config/nvim
+	chmod +x ./scripts/actions.sh
+    ./scripts/actions.sh 1
+}
+
 symlink_dotfiles() {
 	ln -s ${folder_path}/.bashrc ~/.bashrc
 	ln -s ${folder_path}/.bash_logout ~/.bash_logout
@@ -52,6 +59,10 @@ function termux_vim_install {
     pkg install vim
 }
 
+function termux_neovim_install {
+    pkg install neovim
+}
+
 case "$1" in
     packages)
         install_packages
@@ -64,6 +75,9 @@ case "$1" in
         ;;
     vim.rc)
         setup_vimrc
+        ;;
+    nvim.rc)
+        setup_nvimrc
         ;;
     all)
         install_packages
@@ -78,6 +92,10 @@ case "$1" in
         termux_vim_install
         setup_vimrc
         ;;
+    termux.nvim)
+        termux_neovim_install
+        setup_nvimrc
+        ;;
     termux.all)
         # Creates the 'storage' folder
         termux-setup-storage
@@ -87,7 +105,7 @@ case "$1" in
         symlink_dotfiles
         ;;
     *)
-        echo -e "\nUsage: $(basename "$0") {packages|symlink|vim.install|vim.rc|termux.packages|termux.vim|termux.all|all}\n"
+        echo -e "\nUsage: $(basename "$0") {packages|symlink|vim.install|vim.rc|nvim.rc|termux.packages|termux.vim|termux.nvim|termux.all|all}\n"
         exit 1
         ;;
 esac
