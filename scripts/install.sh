@@ -2,6 +2,24 @@
 
 folder_path=$(pwd)
 
+# GLOBAL FUNCTIONS
+setup_vimrc() {
+	git clone https://github.com/barrientosvctor/vimrc.git ~/.vim
+	cd ~/.vim
+	make
+}
+
+symlink_dotfiles() {
+	ln -s ${folder_path}/.bashrc ~/.bashrc
+	ln -s ${folder_path}/.bash_logout ~/.bash_logout
+	ln -s ${folder_path}/.editorconfig ~/.editorconfig
+	ln -s ${folder_path}/.prettierrc.json ~/.prettierrc.json
+	ln -s ${folder_path}/.gitconfig ~/.gitconfig
+	ln -s ${folder_path}/.tmux.conf ~/.tmux.conf
+}
+
+
+# UNIX INSTALLATIONS
 install_vim_from_source() {
 	sudo apt-get install lua5.1 liblua5.1-dev make libxt-dev libgtk-3-dev
 
@@ -18,25 +36,20 @@ install_vim_from_source() {
 	make && sudo make install
 }
 
-setup_vimrc() {
-	git clone git@github.com:barrientosvctor/vimrc.git ~/.vim
-	cd ~/.vim
-	make
-}
-
 install_packages() {
 	# CMake also includes c (cc, gcc) and c++ (g++, c++) compilers.
 	sudo apt install git tmux cmake
 	echo "Installed packages: git, tmux, cmake"
 }
 
-symlink_dotfiles() {
-	ln -s ${folder_path}/.bashrc ~/.bashrc
-	ln -s ${folder_path}/.bash_logout ~/.bash_logout
-	ln -s ${folder_path}/.editorconfig ~/.editorconfig
-	ln -s ${folder_path}/.prettierrc.json ~/.prettierrc.json
-	ln -s ${folder_path}/.gitconfig ~/.gitconfig
-	ln -s ${folder_path}/.tmux.conf ~/.tmux.conf
+# TERMUX FUNCTIONS
+function termux_packages {
+    pkg update
+    pkg install git tmux cmake nodejs-lts
+}
+
+function termux_vim_install {
+    pkg install vim
 }
 
 case "$1" in
@@ -58,8 +71,23 @@ case "$1" in
         setup_vimrc
         symlink_dotfiles
         ;;
+    termux.packages)
+        termux_packages
+        ;;
+    termux.vim)
+        termux_vim_install
+        setup_vimrc
+        ;;
+    termux.all)
+        # Creates the 'storage' folder
+        termux-setup-storage
+        termux_packages
+        termux_vim_install
+        setup_vimrc
+        symlink_dotfiles
+        ;;
     *)
-        echo -e "\nUsage: $(basename "$0") {packages|symlink|vim.install|vim.rc|all}\n"
+        echo -e "\nUsage: $(basename "$0") {packages|symlink|vim.install|vim.rc|termux.packages|termux.vim|termux.all|all}\n"
         exit 1
         ;;
 esac

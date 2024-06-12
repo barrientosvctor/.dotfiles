@@ -33,12 +33,10 @@ $ .\windows\setup.ps1 help
 Dotfiles (un)installation are managed by scripts located un [scripts](/scripts/) folder, you need to convert the script file you want to execute as Bash Script Executable file.
 
 > **Installation**
-* Linux OS: [install.sh](/scripts/install.sh)
-* Termux: [TERMUX.sh](/scripts/TERMUX.sh)
+* Linux OS / Termux: [install.sh](/scripts/install.sh)
 
 > **Uninstallation**
-* Linux OS: [uninstall.sh](/scripts/uninstall.sh)
-* Termux: [TERMUX-UNINSTALL.sh](/scripts/TERMUX-UNINSTALL.sh)
+* Linux OS / Termux: [uninstall.sh](/scripts/uninstall.sh)
 
 You need to convert to Bash Script Executable file all scripts located in [scripts](/scripts/) folder, for this, type the following command:
 
