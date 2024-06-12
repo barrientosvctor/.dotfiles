@@ -2,17 +2,17 @@
 echo "Type the email you will associate with ssh and git: "
 read email
 
-while [[ $email -eq "" ]]; do
-    echo "You cannot leave an empty email. Type again: "
+while [ -z "$email" ]; do
+    echo "You cannot add an empty email. Type again: "
     read email
 done
 
 echo "Give a name for the resulting ssh key file (otherwise will be named as ed25519): "
 read keyname
 
-if [[ $keyname -eq "" ]];
+if [ -z "$keyname" ];
 then
-    $keyname="ed25519"
+    keyname="ed25519"
 fi
 
 private_ssh_keypath="$HOME/.ssh/$keyname"
