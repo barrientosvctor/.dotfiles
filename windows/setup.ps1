@@ -352,6 +352,11 @@ function Dotfiles_PS_SetupSymlinks {
         $processCount = $processCount + 1
     }
 
+    if (-not (Test-Path -Path "$env:HOMEPATH\.editorconfig")) {
+        New-Item -Path "$env:HOMEPATH\.editorconfig" -ItemType SymbolicLink -Value "$PWD\.editorconfig"
+        $processCount = $processCount + 1
+    }
+
     Dotfiles_PS_CountChanges -Count $processCount -ProcessName "Symlink"
 }
 
