@@ -84,7 +84,7 @@ list_available_shell_by_os(os_option)
 
 shell_option = int(input("Type the shell you want to use for Alacritty: "))
 
-while shell_option < 0 or shell_option > len(available_shells[os_option]):
+while not (shell_option >= 0 and shell_option < len(available_shells[os_option])):
     list_available_shell_by_os(os_option)
     shell_option = int(input("That option doesn't exists, choose another: "))
 
