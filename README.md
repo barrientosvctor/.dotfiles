@@ -55,9 +55,3 @@ $ ./scripts/install.sh
 ```
 $ ./scripts/uninstall.sh
 ```
-
-## Todo
-- [x] Make a vim installation on windows script
-- [x] Make a neovim installation on windows script
-- [ ] Make font installation on unix script
-- [x] Make a script to automate alacritty shell config depending the operative system
