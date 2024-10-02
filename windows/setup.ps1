@@ -1,7 +1,7 @@
 Param(
     # Target passed as input.
     ##! Modify the help message when a new target is created.
-    [Parameter(Mandatory, HelpMessage = 'Targets: all, help, modules, alacritty, symlink, fonts, profile, nvim, vim' )]
+    [Parameter(Mandatory, HelpMessage = 'Targets: all, help, modules, alacritty, symlink, profile, nvim, vim' )]
     [string]$Target
 )
 
@@ -22,7 +22,6 @@ $hashTableTargets = @{
     'modules' = "Dotfiles_PS_InstallModules";
     'alacritty' = "Dotfiles_PS_SetupAlacrittyConfigFile";
     'symlink' = "Dotfiles_PS_SetupSymlinks";
-    'fonts' = "Dotfiles_PS_InstallFonts";
     'profile' = "Dotfiles_PS_SetupPSProfile";
     'nvim' = "Dotfiles_PS_SetupAndInstallNeovim";
     'vim' = "Dotfiles_PS_SetupAndInstallVim";
@@ -65,7 +64,6 @@ function Dotfiles_PS_InvokeAllTargets {
     Dotfiles_PS_InstallModules
     Dotfiles_PS_SetupAndInstallVim
     Dotfiles_PS_SetupAndInstallNeovim
-    Dotfiles_PS_InstallFonts
     Dotfiles_PS_SetupAlacrittyConfigFile
     Dotfiles_PS_SetupPSProfile
     Dotfiles_PS_SetupSymlinks
@@ -88,64 +86,6 @@ function Dotfiles_PS_CountChanges {
         Write-Host "--> $ProcessName process successfully executed with $Count changes. <--" -Foregr Green
     } else {
         Write-Host "--> $ProcessName process successfully executed with unknown number of changes. <--" -Foregr Green
-    }
-}
-
-# This function should only be used into this script file.
-# This is the base function to install fonts.
-# The function assumes you are running the script on root dotfiles path.
-# -- Permissions of administrator required: NO
-function Internal_Dotfiles_PS_FontInstaller {
-    Param(
-        [Parameter(Mandatory, HelpMessage = "Type the URI of the font.")]
-        [string] $Uri,
-        [Parameter(Mandatory, HelpMessage = "Type the name you want for the resulting font's files and folders")]
-        [string] $FontName,
-        [Parameter(Mandatory=$false, HelpMessage = "Type the path where fonts are located. The input will be concatenated with the dotfiles's .fonts folder")]
-        [string] $FontsPath,
-        [Parameter(Mandatory=$false, HelpMessage = "Type a string of pattern of files you want to include separed by comma (,)")]
-        [string[]] $Includes,
-        [Parameter(Mandatory=$false, HelpMessage = "Type a string of pattern of files you want to exclude separed by comma (,)")]
-        [string[]] $Excludes
-     )
-
-    # Special folders in powershell: https://richardspowershellblog.wordpress.com/2008/03/20/special-folders/
-    $SystemFontPath = (New-Object -ComObject Shell.Application).Namespace(0x14)
-
-    $DotfilesFontFolder = "$PWD\.fonts"
-    $CompressFontFileExtension = $Uri.Split(".")[-1] # Go to the last element in the array.
-    $CompressFontFile = "$DotfilesFontFolder\$FontName.$CompressFontFileExtension"
-
-    $ResultingFontFolder = "$DotfilesFontFolder\$FontName"
-    $FontPathChildItem = "$ResultingFontFolder\*"
-
-    if (-not ($FontsPath -eq "")) {
-        $FontPathChildItem = "$ResultingFontFolder\$FontsPath\*"
-    }
-
-    if (-Not (Test-Path -Path $DotfilesFontFolder)) {
-        New-Item -ItemType Directory -Path $DotfilesFontFolder
-        $processCount = $processCount + 1
-    }
-
-    if (-not (Test-Path -Path $CompressFontFile)) {
-        # Installs the zip with all font variants
-        Invoke-WebRequest -Uri $Uri -OutFile $CompressFontFile
-        $processCount = $processCount + 1
-    }
-
-    if (-not (Test-Path -Path $ResultingFontFolder)) {
-        # Unzip the font zip
-        Expand-Archive -Path $CompressFontFile -DestinationPath $ResultingFontFolder
-        $processCount = $processCount + 1
-    }
-
-    Get-ChildItem -Path $FontPathChildItem -Include $Includes -Exclude $Excludes | ForEach-Object {
-        if (-not (Test-Path -Path "C:\Windows\Fonts\$($_.Name)")) {
-            $SystemFontPath.CopyHere($_.FullName, 0x10)
-            Write-Host "'$($_.Name)' installed." -ForegroundColor Green
-            $processCount = $processCount + 1
-        }
     }
 }
 
@@ -306,20 +246,6 @@ function Dotfiles_PS_SetupAndInstallNeovim {
     }
 
     Dotfiles_PS_CountChanges -Count $processCount -ProcessName "Neovim installation"
-}
-
-function Dotfiles_PS_InstallFonts {
-    $processCount = 0
-    Internal_Dotfiles_PS_FontInstaller -Uri "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip" -FontName "jetbrainsmono" -Includes "JetBrainsMonoNerdFont-*.ttf"
-    Dotfiles_PS_CountChanges -Count $processCount -ProcessName "JetBrains Mono font"
-
-    $processCount = 0
-    Internal_Dotfiles_PS_FontInstaller -Uri "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Iosevka.zip" -FontName "iosevka" -Includes "IosevkaNerdFont-*.ttf"
-    Dotfiles_PS_CountChanges -Count $processCount -ProcessName "Iosevka font"
-
-    $processCount = 0
-    Internal_Dotfiles_PS_FontInstaller -Uri "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip" -FontName "firacode" -Includes "FiraCodeNerdFont-*.ttf"
-    Dotfiles_PS_CountChanges -Count $processCount -ProcessName "Fira Code font"
 }
 
 # This function assumes you're located in dotfiles's root directory
