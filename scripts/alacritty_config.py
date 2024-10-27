@@ -3,12 +3,12 @@ from platform import system
 
 available_os = ["windows", "unix"]
 available_shells = [
-    ("WSL", "Pwsh", "Powershell"), # Windows
+    ("WSL", "Pwsh", "Powershell", "Command Prompt"), # Windows
     ("bash", "zsh"), # Unix
 ]
 
 shell_cmd = [
-    ("wsl", "pwsh", "powershell"), #Windows
+    ("wsl", "pwsh", "powershell", "cmd"), #Windows
     ("/bin/bash", "/bin/zsh"), #Unix
 ]
 wsl_root: str = "~"
@@ -25,6 +25,7 @@ alacritty_terminal_args = {
         0: ("wsl.exe", "--cd", wsl_root),
         1: ("-NoLogo", "-NoExit", "-Command", "cd ~"),
         2: ("-NoLogo", "-NoExit", "-Command", "cd ~"),
+        3: ("/k", "cd %USERPROFILE%"),
     },
     # Unix
     1: {
