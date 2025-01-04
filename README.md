@@ -14,19 +14,19 @@
 > **Installation including all targets**
 
 ```shell
-$ .\windows\setup.ps1 all
+$ .\scripts\setup.ps1 all
 ```
 
 > **Installation of a specific target**
 
 ```shell
-$ .\windows\setup.ps1 <target>
+$ .\scripts\setup.ps1 <target>
 ```
 
 > **List of all targets available**
 
 ```shell
-$ .\windows\setup.ps1 help
+$ .\scripts\setup.ps1 help
 ```
 
 ## Unix setup
