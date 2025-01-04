@@ -162,7 +162,7 @@ function Dotfiles_PS_SetupPSProfile {
     # PROFILE is the path of the powershell config file.
     if (-not (Test-Path -Path $PROFILE -PathType Leaf)) {
         Write-Host "'$PROFILE' not found, making a symlink..." -ForegroundColor Cyan
-        New-Item -ItemType SymbolicLink -Path $PROFILE -Value "$PWD\windows\Microsoft.PowerShell_profile.ps1"
+        New-Item -ItemType SymbolicLink -Path $PROFILE -Value "$PWD\.config\powershell\Microsoft.PowerShell_profile.ps1"
         $processCount = $processCount + 1
     }
 
